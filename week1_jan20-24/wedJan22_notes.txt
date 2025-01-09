@@ -1,0 +1,279 @@
+CIS 400: Object-oriented design, implementation, and testing
+
+Julie Thornton
+
+
+-----------------------------------------------------------
+
+What will we learn? 
+    Creating and maintaining a large software project
+
+1) Object-oriented development principles
+2) Desktop development using WPF, data binding, and custom events 
+3) Web development using ASP.NET, web forms, and LINQ
+
+Throughout course: writing unit tests, creating UML diagrams
+
+
+
+
+
+--> big project: developing menu, point of sale, website for ???
+
+    Part 1: develop menu using object-oriented design principles
+    Part 2: write point of sale WPF application for restaurant
+    Part 3: create website for restaurant using ASP.NET
+
+
+
+--> see the project from last semester
+
+-----------------------------------------------------------
+
+Course structure - hybrid.
+
+- Module of work each week (posted each Friday):
+    - reading
+    - maybe, a quiz or 2 (not for points, but recommended!)
+    - 2 video tutorials (will start next week - due Mon/Tues)
+    - new milestone for the semester-long project (due Fri)
+
+    - this week is a little different
+
+
+
+
+What will we do during class time?
+    Mondays: lecture/recitation over current material
+
+    Wednesdays: (whatever is left), talk about current milestone,
+        get help if needed
+
+    Fridays: help time
+
+
+
+
+----------------------------------------------------------
+
+Software needed.
+
+- Visual Studio 2022 (disable IntelliCode) and Visio 
+    (can use another UML tool)
+
+
+- How to get free versions of both?
+
+
+- Mac users
+
+
+
+
+- Lab machines
+
+
+
+
+----------------------------------------------------------
+
+Graded work.
+
+Midterm exams (2):      20%
+Final exam:             15%
+Milestones (about 12):  50%
+Tutorials:              15%
+
+
+Grading scale: 90/80/70/60
+
+
+Borderline grades.
+
+
+
+
+
+
+
+-----------------------------------------------------------
+
+Class policies.
+
+- Late work
+    milestones are due each Friday
+    late milestone lose 10% each day they are late 
+        bottom threshold of 40% 
+    all previous work turned in by the Friday after an exam
+
+    same for tutorials (Mon/Tues)
+    
+
+- Dropped exam (will replace lowest midterm with grade on final,
+    if it helps your grade)
+    
+    2 midterms 
+    1 final
+
+
+
+- Incomplete
+
+
+
+- Collaboration
+    tutorials: if you want?
+    milestones: should be your own work
+
+
+- Getting help
+    --> Ed Discussion
+    --> Helping hand extra credit
+
+-----------------------------------------------------------
+
+Course materials.
+
+- Canvas (see syllabus and modules)
+
+
+- Online textbook
+
+
+
+
+--> See any typos? Bug bounty.
+
+
+
+
+
+
+------------------------------------------------------------
+
+THIS week:
+    - Milestone 0 due Fri (finish reading / quiz beforehand!)
+        - practice milestone process (git, create release)
+        - PLUS, post on Ed Discussion (can do this now)
+
+
+
+Milestone 0.
+
+------------------------------------------------------------
+
+Experience with git? Command line? Branches? Merging? 
+Multiple "local" repos?
+
+
+
+
+
+//////////
+
+Consider the following Person class:
+
+public class Person {
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+ 
+
+Create two Person objects – pers1 and pers2. 
+    pers1: John Doe, age 40
+    pers2: Maria Smith, age 20.
+
+
+
+///////
+
+Add a property to Person called "Classification" that is ALWAYS "Person"
+
+
+Add a property to Person called Info that gets a List<string> of:
+    Person's name 
+    Either "minor" or "adult", based on age
+
+
+////////
+
+Overall idea of git.
+
+- have a remote repository (this is the URL you copy before you clone)
+- can have one or many local repositories on different computers
+    - each local repository is connected to the remote repository
+    - the remote repository is the "origin"
+    - each local repository will have a pointer to an active branch ("HEAD")
+    
+--> different local repositories might have different "HEAD" values
+
+--> as you checkout different branches in your local repo, the code on the computer
+    will change. This does NOT mean you've lost your other code.
+
+--> if you made changes to a local branch, you must make a commit and PUSH it
+    to the corresponding remote branch
+
+--> if there are changes in a remote branch, you must PULL them into 
+    the corresponding local branch
+
+////////////////
+
+Example: see branching of a repo
+
+
+////////////////
+
+When you sit down to work:
+
+    git status
+
+--> see what branch you are on
+--> see if you have any local changes (commit them if you do and want to keep them)
+
+
+Pull changes from the corresponding remote branch:
+
+    git pull
+
+(will need to set upstream in configurations initially. Can also do:
+git pull origin <branchName>)
+
+
+(git pull only pulls from the current branch. Will need to separately pull
+or checkout other branches, if needed.)
+
+To get ALL remote branches:
+
+    git fetch origin
+
+Then you can checkout the desired branch and pull in from the remote
+
+///////////////
+
+When you take a break, commit and push changes to current branch:
+
+    git add .
+    git commit -m "describe your changes"
+    git push
+
+(will need to set upstream in configurations initially. Can also do:
+
+    git push -u origin <branchName>
+
+the -u creates a new remote branch with the same if that branch is new. Isn't
+needed if the branch already exists, but doesn't hurt.)
+
+
+/////////////
+
+Other tips:
+
+- commit and push a LOT!
+- stay on a milestone branch until you are completely done. Only then do
+    you want to merge it into main
+
+////////////
+
+Friday: 
+- will discuss Milestone 0
+- you will have time to do Milestone 0 in lab
