@@ -18,7 +18,7 @@ Throughout course: writing unit tests, creating UML diagrams
 
 
 
---> big project: developing menu, point of sale, website for ???
+--> big project: developing menu, point of sale, website for Dairy Barn
 
     Part 1: develop menu using object-oriented design principles
     Part 2: write point of sale WPF application for restaurant
@@ -61,6 +61,9 @@ Software needed.
 - Visual Studio 2022 (disable IntelliCode) and Visio 
     (can use another UML tool)
 
+    --> might need to update Visual Studio (find the Visual Studio installer)
+
+
 
 - How to get free versions of both?
 
@@ -79,10 +82,9 @@ Software needed.
 
 Graded work.
 
-Midterm exams (2):      20%
-Final exam:             15%
-Milestones (about 12):  50%
-Tutorials:              15%
+Exams (2 midterms, 1 optional final):   35%
+Milestones (about 12):                  50%
+Tutorials:                              15%
 
 
 Grading scale: 90/80/70/60
@@ -109,11 +111,8 @@ Class policies.
     same for tutorials (Mon/Tues)
     
 
-- Dropped exam (will replace lowest midterm with grade on final,
-    if it helps your grade)
-    
-    2 midterms 
-    1 final
+- Final exam is optional
+    --> can use it to replace your lowest midterm, if it helps you
 
 
 
@@ -158,18 +157,7 @@ THIS week:
 
 
 
-Milestone 0.
-
 ------------------------------------------------------------
-
-Experience with git? Command line? Branches? Merging? 
-Multiple "local" repos?
-
-
-
-
-
-//////////
 
 Consider the following Person class:
 
@@ -197,6 +185,26 @@ Add a property to Person called Info that gets a List<string> of:
 
 ////////
 
+decimal type, literals
+
+
+uint type
+
+
+////////
+
+Experience with git? Command line? Branches? Merging? 
+Multiple "local" repos?
+
+
+--> who will use multiple machines to work?
+
+--> who will use lab machines?
+
+
+
+//////////
+
 Overall idea of git.
 
 - have a remote repository (this is the URL you copy before you clone)
@@ -215,11 +223,6 @@ Overall idea of git.
 
 --> if there are changes in a remote branch, you must PULL them into 
     the corresponding local branch
-
-////////////////
-
-Example: see branching of a repo
-
 
 ////////////////
 
@@ -244,9 +247,10 @@ or checkout other branches, if needed.)
 
 To get ALL remote branches:
 
-    git fetch origin
+    git fetch
 
-Then you can checkout the desired branch and pull in from the remote
+Then you can checkout the desired branch, and it will automatically track 
+    origin/branchName
 
 ///////////////
 
@@ -263,6 +267,9 @@ When you take a break, commit and push changes to current branch:
 the -u creates a new remote branch with the same if that branch is new. Isn't
 needed if the branch already exists, but doesn't hurt.)
 
+/////////////
+
+See quick example with git branches
 
 /////////////
 
@@ -272,8 +279,12 @@ Other tips:
 - stay on a milestone branch until you are completely done. Only then do
     you want to merge it into main
 
+--> make sure your project builds!
+--> download, extract, open, and build/run the release when you finish
+
 ////////////
 
 Friday: 
-- will discuss Milestone 0
-- you will have time to do Milestone 0 in lab
+- help on Milestone 0
+    --> I recommend you start it before Friday so you can come to class with questions
+    --> we can check to make sure you did the right thing with git/branches/release
