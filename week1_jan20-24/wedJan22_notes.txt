@@ -139,6 +139,8 @@ Course materials.
 - Online textbook
 
 
+- Weekly summary page
+
 
 
 --> See any typos? Bug bounty.
@@ -207,22 +209,28 @@ Multiple "local" repos?
 
 Overall idea of git.
 
-- have a remote repository (this is the URL you copy before you clone)
+- have a remote repository (this is the URL you copy from GitHub before you clone)
 - can have one or many local repositories on different computers
     - each local repository is connected to the remote repository
     - the remote repository is the "origin"
-    - each local repository will have a pointer to an active branch ("HEAD")
+    - each local repository will have a record of the active branch ("HEAD")
     
+
 --> different local repositories might have different "HEAD" values
+
 
 --> as you checkout different branches in your local repo, the code on the computer
     will change. This does NOT mean you've lost your other code.
 
+
 --> if you made changes to a local branch, you must make a commit and PUSH it
     to the corresponding remote branch
 
+
 --> if there are changes in a remote branch, you must PULL them into 
     the corresponding local branch
+
+    
 
 ////////////////
 
