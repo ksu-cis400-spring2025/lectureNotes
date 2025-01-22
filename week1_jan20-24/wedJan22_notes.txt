@@ -125,6 +125,9 @@ Class policies.
     milestones: should be your own work
 
 
+- No AI-generated code or IntelliCode use
+
+
 - Getting help
     --> Ed Discussion
     --> Helping hand extra credit
@@ -230,7 +233,7 @@ Overall idea of git.
 --> if there are changes in a remote branch, you must PULL them into 
     the corresponding local branch
 
-    
+
 
 ////////////////
 
