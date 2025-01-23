@@ -1,0 +1,18 @@
+Milestone 0 due today
+
+Week 2 module is available in Canvas
+
+--> recommend you read Wednesday's lecture notes beginning with
+    "Overall idea of git"
+
+
+--> see how to do Milestone 0
+
+
+Before submitting, make sure you:
+- build your project (it won't run right now)
+- check GitHub - are your changes in the ms0 branch?
+    - are your changes in the ms1 branch
+- download/extract the release. Is it what you want to submit?
+
+--> common mistake: forgetting to save

@@ -247,7 +247,7 @@ Multiple "local" repos?
 
 //////////
 
-Will discuss git at beginning of class on Friday
+Stopped here
 
 //////////
 
