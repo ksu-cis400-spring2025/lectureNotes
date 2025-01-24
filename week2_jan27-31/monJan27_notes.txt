@@ -1,0 +1,115 @@
+Encapsulation tutorial: due tonight
+Properties tutorial: due Tuesday
+Milestone 1: due Friday (you might notice the design is ugly...)
+
+--> make sure your project builds (but it won't run)
+
+--> save your files!
+
+--> how to check what you submitted?
+
+--> what if you need to re-release? v0.1.1, etc.
+
+--> "you are ahead of branch main..."
+
+----------------------------
+
+Properties.
+
+
+--> autoproperty
+
+public int Num {get; set;}
+
+    equivalent to?
+
+
+
+--> how to control visibility?
+
+
+--> how to set default values?
+
+
+
+--> how could we do that from the constructor?
+
+
+--> what is "init"?
+
+
+
+--> lambda notation =>
+
+
+
+---------------------------
+
+Common mistake with properties:
+
+public int Property
+{
+    get
+    {
+        return Property;
+    }
+    set
+    {
+        Property = value;
+    }
+}
+
+obj.Property;
+
+
+----------------------------
+
+
+See LabRoom class. Turn fields into properties.
+--> enforce room size 10-30
+--> make Windows value get-only (except on creation)
+    1) using a constructor
+    2) using init
+
+
+------------------------------
+
+static vs non-static.
+
+    --> when can/should a field/method/property be static?
+    --> when is a field/method/property NOT allowed to be static?
+    --> when should a class be static?
+
+--> can a static class have a constructor?
+
+--> can a non-static class have a static constructor?
+
+
+--> what if we wanted a consistent drinks policy (yes/no) across all
+    lab rooms?
+
+
+--> how could we initialize the drink policy for everyone?
+
+
+--> how could we modify the drinks policy for everyone?
+
+
+---------------------------------------------
+
+Encapsulation - what is this?
+
+
+Want to keep track of scores and majors for students.
+    --> see current organization
+    --> why not great?
+    --> how to improve?
+
+
+----------------------------
+
+
+Other vocab:
+
+Information hiding
+State
