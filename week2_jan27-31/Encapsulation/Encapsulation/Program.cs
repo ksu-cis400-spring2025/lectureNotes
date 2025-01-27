@@ -8,6 +8,13 @@ public class Program
 
     public static void Main(string[] args)
     {
+        //LabRoom room = new() { Windows = false };
+        LabRoom room = new(false);
+
+        //drinks allowed
+        //LabRoom.DrinksAllowed = true;
+
+
         _names = new();
         _scores = new();
         _majors = new();

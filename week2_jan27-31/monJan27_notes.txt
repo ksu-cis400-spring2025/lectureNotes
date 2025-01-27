@@ -2,9 +2,14 @@ Encapsulation tutorial: due tonight
 Properties tutorial: due Tuesday
 Milestone 1: due Friday (you might notice the design is ugly...)
 
+    BBQBaconCheeseburger
+
+
 --> calculating the calories
 
 --> building the prep info
+
+
 
 --> make sure your project builds (but it won't run)
 
@@ -13,6 +18,7 @@ Milestone 1: due Friday (you might notice the design is ugly...)
 --> how to check what you submitted?
 
 --> what if you need to re-release? 
+
 
 --> "you are ahead of branch main..."
 
@@ -27,25 +33,102 @@ public int Num {get; set;}
 
     equivalent to?
 
+private int _num;
+public int Num
+{
+    get
+    {
+        return _num;
+    }
+    set
+    {
+        _num = value;
+    }
+}
+
 
 
 --> how to control visibility?
+    could put private in front of "set"
 
 
 --> how to set default values?
 
 
+public int Num {get; set;} = 5;
+
+
+OR 
+
+private int _num = 5;
+public int Num
+{
+    get
+    {
+        return _num;
+    }
+    set
+    {
+        _num = value;
+    }
+}
+
 
 --> how could we do that from the constructor?
 
+all in a class called "Lecture"
+
+public Lecture() 
+{
+    Num = 5;
+    //or _num = 5;
+}
+
+
+
 
 --> what is "init"?
+
+
+initialize
+
+public int Num {get; init;} = 5;
+
+
+all in class called "Lecture"
+
+Lecture l = new() {Num = 10};
+
+
+
+what if no init?
+
+public int Num {get;} = 5;
+
+can have constructor
+
+public Lecture() {
+    Num = 10;
+}
 
 
 
 --> lambda notation =>
 
 
+public int Num => 10; //is a property with get access, but can't change
+
+
+Lecture lec = new();
+lec.Num = 20; //no, can't change
+
+
+private int _num = 5;
+public int Num
+{
+    get => _num;
+    set => _num = value;
+}
 
 ---------------------------
 
@@ -106,6 +189,8 @@ static vs non-static.
 --> how could we modify the drinks policy for everyone?
 
 
+---------------------------------------------
+stopped here, will continue on Wednesday
 ---------------------------------------------
 
 Encapsulation - what is this?
