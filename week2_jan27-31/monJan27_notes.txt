@@ -2,13 +2,17 @@ Encapsulation tutorial: due tonight
 Properties tutorial: due Tuesday
 Milestone 1: due Friday (you might notice the design is ugly...)
 
+--> calculating the calories
+
+--> building the prep info
+
 --> make sure your project builds (but it won't run)
 
 --> save your files!
 
 --> how to check what you submitted?
 
---> what if you need to re-release? v0.1.1, etc.
+--> what if you need to re-release? 
 
 --> "you are ahead of branch main..."
 
@@ -68,8 +72,7 @@ obj.Property;
 See LabRoom class. Turn fields into properties.
 --> enforce room size 10-30
 --> make Windows value get-only (except on creation)
-    1) using a constructor
-    2) using init
+    (what are two ways to do this?)
 
 
 ------------------------------
@@ -77,10 +80,18 @@ See LabRoom class. Turn fields into properties.
 static vs non-static.
 
     --> when can/should a field/method/property be static?
+
+
     --> when is a field/method/property NOT allowed to be static?
+
+
     --> when should a class be static?
 
+
+
+
 --> can a static class have a constructor?
+
 
 --> can a non-static class have a static constructor?
 
