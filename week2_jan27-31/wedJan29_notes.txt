@@ -1,0 +1,32 @@
+Milestone 1: due Friday
+
+--> Week 3 module will be published automatically just after midnight
+
+
+///////////////////////////////////////
+
+static vs non-static.
+
+    --> when can/should a field/method/property be static?
+
+    --> when is a field/method/property NOT allowed to be static?
+
+    --> when should a class be static?
+
+    --> can a static class have a constructor?
+
+    --> can a non-static class have a static constructor?
+
+
+
+-------------------------------------------------
+
+Encapsulation - what is this?
+
+
+Want to keep track of scores and majors for students.
+    --> see current organization
+    --> why not great?
+    --> how to improve?
+
+
