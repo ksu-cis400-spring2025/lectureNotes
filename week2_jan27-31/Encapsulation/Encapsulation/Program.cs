@@ -2,9 +2,13 @@
 
 public class Program
 {
-    private static List<string> _names;
-    private static List<List<int>> _scores;
-    private static List<string> _majors;
+    /*
+    private static List<string> _names = new();
+    private static List<List<int>> _scores = new();
+    private static List<string> _majors = new();
+    */
+
+    private static Dictionary<string, Student> _students = new();
 
     public static void Main(string[] args)
     {
@@ -15,19 +19,27 @@ public class Program
         //LabRoom.DrinksAllowed = true;
 
 
-        _names = new();
-        _scores = new();
-        _majors = new();
-
-        //how to store this info?
         //Bob, CS, 80/70/92
-        //Jill, CMPEN, 95/68/88
+        /*
+        _names.Add("Bob");
+        _scores.Add(new List<int> { 80, 70, 92 });
+        _majors.Add("CS");
 
+        //what if our list had a bunch of students
         //how could we change major of Bob to MATH?
-    }
+        int index = _names.IndexOf("Bob");
+        _majors[index] = "MATH";*/
 
-    public static void ChangeMajor(string name, string newMajor)
-    {
-        throw new NotImplementedException();
+
+        Student s = new("Bob");
+        s.Major = "CS";
+        s.AddScore(40);
+
+        _students["Bob"] = s;
+
+        //add other students
+
+        //change bob's major
+        _students["Bob"].Major = "MATH";
     }
 }

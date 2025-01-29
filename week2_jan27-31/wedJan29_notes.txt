@@ -12,16 +12,27 @@ Milestone 1: due Friday
 static vs non-static.
 
     --> when can/should a field/method/property be static?
+        field/property: same value shared across all instances
+        method: want to call the method without creating an object
+            (library methods)
+
 
     --> when is a field/method/property NOT allowed to be static?
+        field: (most of the time, not static) when I want to store a different
+            value for different instances
+        property/method: if they use a member (like a field) that is NOT static
+
+
 
     --> when should a class be static?
-
+        when all the fields/properties/methods are also static
 
 
 -------------------------------------------------
 
 Encapsulation - what is this?
+    identifying elements we're representing and putting their information and
+    operations in one place
 
 
 Want to keep track of scores and majors for students.
