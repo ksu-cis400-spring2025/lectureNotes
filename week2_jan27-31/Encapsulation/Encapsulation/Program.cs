@@ -20,18 +20,10 @@ public class Program
         _majors = new();
 
         //how to store this info?
-
         //Bob, CS, 80/70/92
         //Jill, CMPEN, 95/68/88
 
-        //write get average method
-
-        //change major of Bob to MATH
-    }
-
-    public static int GetAverage(string name)
-    {
-        throw new NotImplementedException();
+        //how could we change major of Bob to MATH?
     }
 
     public static void ChangeMajor(string name, string newMajor)
