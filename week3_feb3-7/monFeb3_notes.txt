@@ -1,0 +1,124 @@
+Monday: Methods tutorial
+Tuesday: Documentation tutorial
+Friday: Milestone 2
+    corrections: missing comma in BrownieSundae description
+    veggie burger default calories: 585
+    strawberry shortcake default calories: 770
+
+--> in general, you don't have to document tutorials
+(...except the documentation tutorial...)
+
+///////////////////////////
+
+Topics for the week:
+- program memory
+- objects in memory
+- enums
+- C# namespace vs folder structure
+
+
+/////////////////////////
+
+Sections in memory:
+
+- static
+- stack
+- heap
+
+
+--> What goes on each part?
+
+
+--> Can static variables change?  
+Can static memory size change? 
+
+
+Memory leak issues?
+
+
+
+
+--> When does stack grow and shrink? 
+Is stack limited in size? 
+    
+    Is memory for ALL value types on the stack?
+
+
+
+
+--> Is ALL memory for reference types on the heap? 
+    Is heap limited in size?
+    When is memory released on heap?
+
+
+
+//////////////////////////
+
+--> see Person.cs 
+
+--> want Bob, age 20, lives at 123 Fake St in MadeUp, KS
+
+--> how could we create this? What happens in memory?
+
+
+--> does it make a difference if "p" is a field/property vs a local variable?
+
+
+////////////////////////
+
+enums.
+
+public enum SomeName 
+{
+    Value1, Value2, ...
+}
+
+
+
+--> are really ints (0, 1, 2, ...). Can be cast to ints in this way.
+
+
+public enum Soda
+{
+    Sprite,
+    DrPepper,
+    DietCoke,
+    Coke   
+}
+
+--> declare an enum variable, set to Sprite
+
+
+
+
+--> print it (use an interpolated string). What prints?
+
+
+
+
+--> what if it had the value DrPepper? What would print?
+
+--> how to loop through all enum values?
+
+
+
+////////////////////////////////
+
+C# namespace vs folder structure.
+
+
+- see creating a new folder in Visual Studio
+
+- see moving an existing file into a new folder
+
+- see creating a new file in a new folder
+
+--> how to check project namespace
+
+////////////////////////////////
+
+Using git on multiple machines
+
+////////////////////////////////
+
+Wednesday: discuss Milestone 2
