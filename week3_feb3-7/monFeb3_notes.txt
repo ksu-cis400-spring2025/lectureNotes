@@ -21,34 +21,87 @@ Topics for the week:
 
 Sections in memory:
 
-- static
-- stack
-- heap
+- static - static variables, literals (strings can be big), program instructions
+
+
+- stack - scope change (method, loop, conditional)
+    allocated (pushed on stack) when I enter a new scope
+    released (popped off stack) when I leave the scope
+
+- heap - new (used for allocating space for objects/arrays)
 
 
 --> What goes on each part?
 
 
---> Can static variables change?  
-Can static memory size change? 
+--> Can static variables change?  yes! (the value at the allocated spot
+    in memory can change, but no new memory is allocated)
+
+Can static memory size change?  NO - known before program starts
 
 
 Memory leak issues?
 
+public static Person p = new Person(...);
+
+then Person object would never be garbage collected
 
 
 
 --> When does stack grow and shrink? 
-Is stack limited in size? 
+    grow: enter a new scope (loop, conditional, method call)
+    shrinks leaves a scope
+
+Is stack limited in size? yes (stack overflow exception)
+    most often caused by infinite recursion (repeatedly entering a scope
+    without leaving a scope)
     
     Is memory for ALL value types on the stack?
 
+        int num;
 
+        it IS allocated on the stack if it is a local (scoped variable)
+            loop counter, variable in method, parameter, defined in conditional/loop
+
+        OR, might be a field of a class
+
+            in that case, allocated on the heap as part of the new object itself
+
+        OR, an int might be a static variable, and then allocated on the stack    
 
 
 --> Is ALL memory for reference types on the heap? 
-    Is heap limited in size?
+
+Inside of a method:
+Person p = new Person(...);
+
+new Person(...): creates space for a Person object (including all its fields)
+    on the heap
+
+
+Person p is a local (scoped variable), its space is on the heap
+
+
+OR:
+
+Suppose "p" is a field:
+p = new Person(...);
+
+Person still on heap, p would be on heap as part of its encompassing object
+
+
+    Is heap limited in size? yes
+        (out of memory exception)
+
+List<Person> list = new();
+while (some forever condition) {
+    list.Add(new Person(...));
+}
+
+
     When is memory released on heap?
+
+when its reference is no longer stored in memory
 
 
 
@@ -59,6 +112,22 @@ Is stack limited in size?
 --> want Bob, age 20, lives at 123 Fake St in MadeUp, KS
 
 --> how could we create this? What happens in memory?
+
+
+Person p = new Person("Bob"){ Age = 20 };
+p.CurrentAddress = new Address(123, "Fake St", "MadeUp", "KS");
+
+Suppose p is a local variable.
+    allocated space for a Person on the heap (space for name, age, 
+                reference to address)
+
+    p (holds a memory address) allocated on the stack
+
+    new Address object allocated on the heap
+
+
+What if Person p was a field instead?  p would be allocated on heap
+    as part of its encompassing object
 
 
 --> does it make a difference if "p" is a field/property vs a local variable?
@@ -88,17 +157,33 @@ public enum Soda
 
 --> declare an enum variable, set to Sprite
 
-
+Soda drink = Soda.Sprite;
 
 
 --> print it (use an interpolated string). What prints?
 
 
+Console.Write($"My drink is: {drink}");
+
+My drink is: Sprite
+
 
 
 --> what if it had the value DrPepper? What would print?
 
+drink = Soda.DrPepper;
+
+Console.Write($"My drink is: {drink}");
+
+My drink is: DrPepper
+
+
+
 --> how to loop through all enum values?
+
+foreach(Soda s in Enum.GetValues<Soda>()) {
+    
+}
 
 
 
