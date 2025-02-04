@@ -1,0 +1,41 @@
+Milestone 2 due Friday.
+
+
+Add 5 new enums:
+    Type of cheese
+    Size of coffee drink
+    Type of ice cream cone
+    Type of ice cream mix-in
+    Type of ice cream sauce
+    (why use enums instead of strings?)
+
+Each burger has cheese/patties properties (1-2 or 1-3)
+    constraints?
+    what other properties are affected?
+    what to do with bool cheese properties?
+
+Each sundae has a sauce/scoops properties
+    constraints?
+    what other properties are affected?
+    what to do with bool sauce properties?
+
+Ice cream cone has scoops and cone type 
+    what other properties are affected?
+
+New classes: Mocha, Latte, WinterSwirl
+
+All coffee items have a size
+    scaling?
+
+
+/////
+
+--> be sure to document!
+
+summary above class, property, method
+methods should have params/return
+
+
+
+--> reorganize code into folders. Be careful! 
+    Might rename namespaces.
