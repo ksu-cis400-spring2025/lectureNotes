@@ -1,0 +1,153 @@
+Interfaces tutorial: due today
+Inheritance tutorial: due Tuesday
+
+Milestone 3: due Friday
+
+///////////////////////
+
+What is the purpose of an interface?
+
+If a class implements an interface, what does it have to do?
+
+
+//////////////////////
+
+Example: Chicken and Dog
+
+- what if we wanted a list of several chickens and dogs, 
+    and to get the sound of each?
+
+- what do they have in common? how could we refactor?
+
+- how to use?
+
+
+
+
+
+//////////////////////
+
+Can we implement multiple interfaces?
+
+
+///////////////////////
+
+(What are we going to do with our menu items?)
+
+//////////////////////
+
+Casting examples with Dog/Animal
+
+
+Dog d = new(){Name = "Fido"};
+IAnimal a = d;                  //OK? 
+                                //can we get the dog's name now?
+
+a.Name  //can we do this?
+
+
+
+
+IAnimal another = new Dog();
+Dog d2 = another;               //OK? 
+
+
+///////////////////////////////////////////
+
+Inheritance 
+
+-> when should we refactor to use inheritance?
+
+
+
+
+What do we have to do when we extend a "regular" (non-abstract) class?
+
+
+    what does child inherit?
+
+    what does it have to do?
+
+
+
+
+How do we override a method/property?
+    1) in the parent, say: ??? 
+    2) in the child, say: ??? 
+
+
+Do we HAVE to override things? 
+
+
+
+/////////////////////
+
+Purpose of an abstract class? 
+
+
+
+Can an abstract class implement an interface? 
+
+
+What do we have to do when we extend an abstract class?
+    public class Child : AbstractClass 
+
+    -->what does Child inherit?
+
+
+    -->what does Child have to do? 
+
+
+
+
+
+///////////////////////////////
+
+
+Can we extend more than one "regular" class? 
+
+
+Can we extend more than one abstract class? 
+
+
+
+Does an abstract class have to have abstract methods/properties?
+
+
+
+
+--> protected
+    visibility: ??
+
+
+////////////////////////////
+
+
+
+--> how do constructors work with inheritance?
+    
+    Corgi extends Dog, which extends Animal
+    
+
+   --> when are the different constructors called when we do (assume default constr.):
+   Corgi c = new Corgi();
+
+
+
+//////////////////////////
+
+
+See example: Students
+
+
+////////////////////////
+
+See example: Shirts
+
+- what is there in common?
+
+- how to refactor?
+
+////////////////////////
+
+Next time: discuss Milestone 3
