@@ -5,12 +5,6 @@ Milestone 3: due Friday
 
 ///////////////////////
 
-What is the purpose of an interface?
-
-If a class implements an interface, what does it have to do?
-
-
-//////////////////////
 
 Example: Chicken and Dog
 
@@ -27,7 +21,12 @@ Example: Chicken and Dog
 
 //////////////////////
 
+What is the purpose of an interface?
+
+If a class implements an interface, what does it have to do?
+
 Can we implement multiple interfaces?
+
 
 
 ///////////////////////
