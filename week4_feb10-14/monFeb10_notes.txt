@@ -151,3 +151,25 @@ See example: Shirts
 ////////////////////////
 
 Next time: discuss Milestone 3
+
+Big picture hierarchy:
+
+
+BurgerTopping enum.
+
+
+IngredientDatabase - static class (standin for a database) that stores info for all
+    ingredients.
+
+    --> IngredientInfo: inner class with: Name, Calories, AdditionalPrice
+
+
+
+    e.g.: private static Dictionary<BurgerTopping, IngredientInfo> _burgerInfo;
+
+    -->  how to initialize in constructor?
+
+
+    --> how to write GetBurgerToppingName, GetBurgerToppingCost, 
+        GetBurgerToppingCalories?
+
