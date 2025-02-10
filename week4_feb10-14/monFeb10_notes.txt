@@ -9,11 +9,9 @@ Milestone 3: due Friday
 Example: Chicken and Dog
 
 - what if we wanted a list of several chickens and dogs, 
-    and to get the sound of each?
+    get the total number of legs and print the sound of each?
 
 - what do they have in common? how could we refactor?
-
-- how to use?
 
 
 
@@ -23,10 +21,27 @@ Example: Chicken and Dog
 
 What is the purpose of an interface?
 
+    create list of requirements for related types
+
+    know whoever implements the interface has implemented
+        those properties/methods
+
+
+
 If a class implements an interface, what does it have to do?
 
-Can we implement multiple interfaces?
+    list all the requirements of the interface
 
+
+Can we implement multiple interfaces? yes
+
+public interface IExample {
+    void Stuff();
+}
+
+public abstract class TestClass : IExample {
+    public abstract void Stuff();
+}
 
 
 ///////////////////////
@@ -39,16 +54,24 @@ Casting examples with Dog/Animal
 
 
 Dog d = new(){Name = "Fido"};
-IAnimal a = d;                  //OK? 
+IAnimal a = d;                  //OK? yes! a Dog is an IAnimal
                                 //can we get the dog's name now?
 
-a.Name  //can we do this?
+a.Name  //can we do this? NO! IAnimal does not have a name
+
+Would need:
+Console.WriteLine((a as Dog).Name);
 
 
 
 
 IAnimal another = new Dog();
-Dog d2 = another;               //OK? 
+Dog d2 = another;               //OK? NO!
+
+Need:
+
+Dog d2 = another as Dog;
+
 
 
 ///////////////////////////////////////////
@@ -57,22 +80,36 @@ Inheritance
 
 -> when should we refactor to use inheritance?
 
+code duplication
 
 
 
 What do we have to do when we extend a "regular" (non-abstract) class?
 
+public class ParentClass {
+    public void Stuff() {
+        ....
+    }
+}
+
+
+public class ChildClass : ParentClass {
+
+}
+
 
     what does child inherit?
+        public and protected methods, properties
 
-    what does it have to do?
+
+    what does it have to do? no
 
 
 
 
 How do we override a method/property?
-    1) in the parent, say: ??? 
-    2) in the child, say: ??? 
+    1) in the parent, say: ??? virtual
+    2) in the child, say: ???  override
 
 
 Do we HAVE to override things? 
@@ -83,18 +120,37 @@ Do we HAVE to override things?
 
 Purpose of an abstract class? 
 
+marked abstract
+must be abstract if it has an abstract method or property
+
+some things abstract, can be completed by child
+other things fully implemented, inherited by children
 
 
-Can an abstract class implement an interface? 
+
+Can an abstract class implement an interface? yes
+
+need to mention everything from interface
+might implement some, leave others abstract
+
+
+public class AbstractClass {
+    public abstract void Things();
+}
 
 
 What do we have to do when we extend an abstract class?
-    public class Child : AbstractClass 
+    public class Child : AbstractClass {
+
+
+    }
 
     -->what does Child inherit?
+        everything public/protected
 
-
-    -->what does Child have to do? 
+    -->what does Child have to do? doesn't have to do anything
+    BUT if it inherits abstract members, it has to be labeled
+    abstract
 
 
 
@@ -148,6 +204,8 @@ See example: Shirts
 - how to refactor?
 
 ////////////////////////
+
+/////////////////////////////
 
 Next time: discuss Milestone 3
 

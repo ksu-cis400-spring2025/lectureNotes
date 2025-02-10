@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace InterfaceExamples
 {
-    public class Chicken : IAnimal
+    public class Snake : IAnimal
     {
+        public uint Legs => throw new NotImplementedException();
+
         public string Sound()
         {
-            return "Cluck";
+            throw new NotImplementedException();
         }
-
-        public uint Legs { get; } = 2;
     }
 }
