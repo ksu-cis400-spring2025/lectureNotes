@@ -1,0 +1,121 @@
+Milestone 3 discussion
+
+
+Overall structure:
+
+IMenuItem interface, implemented by:
+    Burger (abstract class)
+    IceCream (abstract class)
+    Drink (abstract class)
+
+
+Each abstract class should pull out common code shared by
+    those menu items
+
+
+If there is a common feature among those types of items,
+    but the implementation details aren't shared: 
+        list it, but make it abstract
+
+***Make use of protected fields or properties that can be
+    initialized differently for each child class
+
+    --> this may let you pull out even more common code
+
+
+
+Feel free to add constructors/fields/properties/methods
+as needed!
+
+/////////////////////////////
+
+BurgerTopping enum.
+
+
+IngredientDatabase - static class (standin for a database) that stores info for all
+    ingredients.
+
+    --> IngredientInfo: inner class with: Name, Calories, AdditionalPrice
+
+
+
+    e.g.: private static Dictionary<BurgerTopping, IngredientInfo> _burgerInfo;
+
+    -->  how to initialize in constructor?
+
+
+    --> how to write GetBurgerToppingName?
+
+
+///////////////////////////
+
+Drink class.
+
+What properties?
+
+
+What will stay abstract?
+
+
+What will be implemented?
+
+
+
+////////////////////////////
+
+IceCream class.
+
+What properties?
+
+What will stay abstract?
+
+
+What will be implemented?
+
+
+
+optional abstract class: Sundae
+
+
+
+
+////////////////////////////
+
+Burger class.
+
+Inner class: BurgerIngredient
+    BurgerTopping
+    Name
+    Included
+    Default
+
+
+public Dictionary<BurgerTopping, BurgerIngredient> AllToppings { get; } = new();
+
+
+--> purpose?
+--> how to populate?
+
+
+
+Burger properties:
+
+
+
+What will stay abstract?
+
+
+What will be implemented?
+
+
+/////////////////////////////////////
+
+BYOBurger.
+
+
+
+PickTwo implements IMenuItem
+- BurgerChoice/IceCreamChoice
+- defaults?
+- calories?
+- price?
