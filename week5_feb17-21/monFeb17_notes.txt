@@ -12,6 +12,9 @@ Milestone 4: due Sunday (extended to give you a full week
 --> how to customize a burger?
 
 
+ClassicCheeseburger c = new();
+c.AllToppings[BurgerTopping.Ketchup].Included = false;
+
 
 
 //////////////////////////
@@ -34,6 +37,7 @@ After the exam, we will start on WPF (to make the UI)
 Today:
 - Creating a test project
 - Writing test cases 
+- UML
 - Implementing a collection
 - Nullables
 
@@ -53,6 +57,23 @@ Creating an XUnit testing project
 
 Adding a project reference
 
+
+////////////////////////
+
+
+In general, what to test?
+
+1) default values - Fact
+    Legs - 4
+    Age - 0
+
+
+2) derived values - properties/methods - Theory
+
+
+3) enforcing property bounds
+    does it allow GOOD changes?
+    does it not allow BAD changes?
 
 ////////////////////////
 
@@ -80,11 +101,6 @@ GlobalUsings.cs
 
 ////////////////////////
 
-In general, what to test?
-
-
-////////////////////////
-
 Kinds of asserts
 
     Assert.Equal(expected, actual);
@@ -98,6 +114,9 @@ Kinds of asserts
     
     Assert.IsAssignableFrom<T>(item); 
 
+Example:
+    Assert.IsAssignableFrom<IMenuItem>(someObject);
+
 //////////////////////
 
 Implementing a collection.
@@ -108,11 +127,30 @@ Adds a legs count property
 
 //////////////////////
 
-UML.
+UML. - Visio
+
+
++ public 
+- private
+# protected
+
+
++ Calories: uint <<get>>
+
 
 --> be familiar with how to list ALL members
 --> for milestones, only need to list PUBLIC members
 --> constructors? don't need default
+
+
+/////////////////////////////////
+
+Stopped here.
+
+On Wednesday, will discuss UML a bit more, plus information about unit
+tests for Milestone 4
+
+/////////////////////////////////
 
 Relationships:
     Realization (is-a):
