@@ -3,8 +3,18 @@ Milestone 3 was due last night
 Testing tutorial: due tonight
 UML tutorial: due tomorrow
 
+
+///////////////////////////
+
 Milestone 4: due Sunday (extended to give you a full week
     since the last milestone)
+
+--> how to customize a burger?
+
+
+
+
+//////////////////////////
 
 Exam 1: Wednesday, February 26
 
@@ -31,6 +41,8 @@ Today:
 ////////////////////////
 
 Dog class: make Legs allow values of 2-4
+
+Add Age property
 
 Implement PeopleYears property
 
@@ -110,11 +122,12 @@ Relationships:
 
 
 What members to show if you are implementing an interface?
-    show them ALL in each implementing class
+
+
 
 What members to show if you are extending a class?
-    not overridden: just write it in the parent
-    is overridden: list it both places
+    not overridden?
+    is overridden?
 
 
 ///////////////////
