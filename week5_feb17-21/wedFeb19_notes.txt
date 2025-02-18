@@ -1,0 +1,175 @@
+Milestone 4: due Sunday 
+
+--> This is one of the more time-consuming milestones. Start early!
+
+//////////////////////////
+
+Exam 1: Wednesday, February 26
+
+
+Next week will have a different structure:
+    - No tutorials or milestones
+    - Review on Monday
+    - Exam 1 on Wednesday
+    - Work day Friday
+    - ALL past due assignments must be submitted by Friday, Feb 28
+        for any partial credit
+
+After the exam, we will start on WPF (to make the UI)
+
+//////////////////////////////
+
+Today:
+- Milestone 4 tests
+- Milestone 4 UML
+
+//////////////////////////////
+
+Nullables
+
+    type? name;
+
+What does it mean? 
+
+Why use them? 
+
+What if you get warnings about null values?
+
+
+///////////////////
+
+Tests for Milestone 4.
+
+Do first: specific required tests
+
+
+
+- should have a separate test class for each non-abstract menu item
+    - test default values for all properties whose value can change
+        (except you don't have to test prep info defaults)
+
+
+    - test any bounds/constraints for properties -- make sure you CAN 
+        change those properties to a *good* value, and that you CAN'T
+        change them to a *bad* value
+
+
+
+    - test each derived property based on possible configurations
+
+
+    - test IsAssignableFrom with IMenuItem, base class
+
+
+
+/////////////////////////////////////////
+
+Example: ClassicCheeseburger
+    ketchup, mustard, pickles, onions - included
+    bacon, lettuce, tomato - not included
+    American cheese
+    non-veggie
+    1 patty
+
+
+    what to do for defaults test?
+
+
+
+
+    what to do for derived properties? what kinds of test cases? 
+        
+        what should you choose for inline data?
+
+        Parameters:
+            
+
+
+
+
+
+    how to test preparation information?
+        
+
+
+    Bounds? 
+
+
+//////////////////////////////////////
+
+Order tests: use mock objects
+    (can we add accessors when implementing interface?)
+    new properties: TaxRate, Subtotal, Total, Tax
+    TaxRate: check that default is 0.0915
+
+    private class MockMenuItem : IMenuItem {
+        //list all things from interface
+
+        public decimal Price { get; set; }
+    }
+
+    Subtotal:
+        MockMenuItem m = new() {Price = 5.0m};
+
+
+////////////////////////////////////   
+
+PickTwo tests:
+
+
+
+/////////////////////////////////////
+
+BYOBurger tests:
+    all ingredients are possible
+
+    configuration instead of bools. pass BurgerTopping[] 
+
+
+
+/////////////////////////////
+
+UML for Milestone 4.
+
+Relationships:
+    Realization (is-a):
+        what for?
+        looks like?
+        where used?
+
+
+    Generalization (is-a):
+        what for? 
+        looks like?
+        where used?
+
+
+    Aggregation (has-a): 
+        what for? 
+        looks like?
+        where used?
+        multiplicities?
+
+
+    Composition (has-a):
+        what for? 
+        looks like?
+        where used?
+        multiplicities?
+
+
+
+
+Enums? 
+
+ICollection? 
+
+IngredientDatabase?
+
+BurgerIngredient?
+
+PickTwo?
+
+How to organize?
+
+
