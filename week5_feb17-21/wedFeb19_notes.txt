@@ -20,6 +20,7 @@ After the exam, we will start on WPF (to make the UI)
 //////////////////////////////
 
 Today:
+- Tiny bit on nullables 
 - Milestone 4 tests
 - Milestone 4 UML
 
@@ -27,13 +28,13 @@ Today:
 
 Nullables
 
-    type? name;
+public List<string> MyList {get; set;}
 
-What does it mean? 
 
-Why use them? 
+--> what if you got a compiler warning about nullables?
 
-What if you get warnings about null values?
+--> how to fix?
+
 
 
 ///////////////////
@@ -45,20 +46,20 @@ Do first: specific required tests
 
 
 - should have a separate test class for each non-abstract menu item
-    - test default values for all properties whose value can change
+    1) test default values for all properties whose value can change
         (except you don't have to test prep info defaults)
 
 
-    - test any bounds/constraints for properties -- make sure you CAN 
+    2) test any bounds/constraints for properties -- make sure you CAN 
         change those properties to a *good* value, and that you CAN'T
         change them to a *bad* value
 
 
 
-    - test each derived property based on possible configurations
+    3) test each derived property based on possible configurations
 
 
-    - test IsAssignableFrom with IMenuItem, base class
+    4) test IsAssignableFrom with IMenuItem, base class
 
 
 
@@ -72,35 +73,43 @@ Example: ClassicCheeseburger
     1 patty
 
 
-    what to do for defaults test?
+    1) what to do for defaults test?
 
 
 
 
-    what to do for derived properties? what kinds of test cases? 
+    2) which derived properties to test? what kinds of test cases? 
         
-        what should you choose for inline data?
-
         Parameters:
+
+        what should you choose for inline data?
             
 
 
 
 
 
-    how to test preparation information?
+        --> preparation information?
         
 
 
-    Bounds? 
+    3) how to test bounds? 
 
 
 //////////////////////////////////////
 
 Order tests: use mock objects
-    (can we add accessors when implementing interface?)
     new properties: TaxRate, Subtotal, Total, Tax
-    TaxRate: check that default is 0.0915
+
+
+    Defaults:
+
+
+
+
+    Derived properties:
+
+
 
     private class MockMenuItem : IMenuItem {
         //list all things from interface
@@ -108,8 +117,6 @@ Order tests: use mock objects
         public decimal Price { get; set; }
     }
 
-    Subtotal:
-        MockMenuItem m = new() {Price = 5.0m};
 
 
 ////////////////////////////////////   
