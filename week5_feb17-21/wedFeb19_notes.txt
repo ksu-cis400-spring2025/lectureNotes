@@ -28,10 +28,13 @@ Today:
 
 Nullables
 
-public List<string> MyList {get; set;}
+public List<string>? MyList {get; set;}
 
 
 --> what if you got a compiler warning about nullables?
+
+MyList.Add(...);
+
 
 --> how to fix?
 
@@ -49,14 +52,15 @@ Do first: specific required tests
     1) test default values for all properties whose value can change
         (except you don't have to test prep info defaults)
 
+    2) test each derived property based on possible configurations
+        Price, Calories, PreparationInformation
 
-    2) test any bounds/constraints for properties -- make sure you CAN 
+
+    3) test any bounds/constraints for properties -- make sure you CAN 
         change those properties to a *good* value, and that you CAN'T
         change them to a *bad* value
 
-
-
-    3) test each derived property based on possible configurations
+        Patties/Scoops/Cheese/Sauce
 
 
     4) test IsAssignableFrom with IMenuItem, base class
@@ -75,26 +79,77 @@ Example: ClassicCheeseburger
 
     1) what to do for defaults test?
 
+        assert that patty is 1
+        assert that cheese is American
+
+        assume b is a ClassicCheeseburger object
+
+        Assert.True(b.AllToppings[BurgerTopping.Ketchup].Included);
+        similar for mustard/pickles/onions
+
+        same, but assert false for bacon/lettuce/tomato
+
+        assert that the count of b.AllToppings is 7
+
+        assert that veggie is false
+
+        check default price is $6.29, default calories are 615
 
 
 
-    2) which derived properties to test? what kinds of test cases? 
+    2) which derived properties to test? Calories/Price/PreparationInformation
+    
+        what kinds of test cases? theory
         
         Parameters:
+            bool ketchup,
+            bool mustard,
+            //total of 7 bools for the 7 possible toppings 
+            Patties
+            veggie 
+            cheese 
+            expected value
+
 
         what should you choose for inline data?
             
+            2^7
 
+            opposite of default toppings
+            included all toppings
+            included no toppings
+            make sure each parameter (cheese, veggie, patties) gets changed
+                as part of some test
 
 
 
 
         --> preparation information?
+
+        Parameters:
+            bool ketchup,
+            bool mustard,
+            //total of 7 bools for the 7 possible toppings 
+            Patties
+            veggie 
+            cheese 
+            expected value - string[] prepInfo
         
+        [InlineData(...., new string[]{"Hold Ketchup", "Add Bacon"})]
 
 
-    3) how to test bounds? 
+        set up burger with that configuration
 
+        Assert.All(prepInfo, info => b.PreparationInformation.Contains(info));
+
+        also test that the counts of prepInfo and b.PreparationInformation match
+
+
+    3) how to test bounds? Patties, Cheese
+
+    recommend modeling after dog legs bounds unit test from Monday
+
+    4) test IsAssignableFrom with IMenuItem, Burger
 
 //////////////////////////////////////
 
@@ -103,12 +158,21 @@ Order tests: use mock objects
 
 
     Defaults:
+        TaxRate - 0.0915
+        Subtotal/Total/Tax all 0
 
 
 
 
-    Derived properties:
+    Derived properties: Subtotal, Tax, Total
 
+
+    Subtotal, e.g.:
+        Order o = new();
+        o.Add(new MockMenuItem(){Price = 5.0m});
+        o.Add(new MockMenuItem(){Price = 15.0m});
+
+        Assert.Equal(20.0m, o.Subtotal, 2);
 
 
     private class MockMenuItem : IMenuItem {
@@ -123,6 +187,16 @@ Order tests: use mock objects
 
 PickTwo tests:
 
+    1) default BurgerChoice is a ClassicCheeseburger, default IceCreamChoice is
+        ClassicSundae
+
+        PickTwo two = new();
+
+        Assert.IsType<ClassicCheeseburger>(two.BurgerChoice);
+
+    2) calories, price
+
+        Assert.Equal(two.BurgerChoice.Calories + two.IceCreamChoice.Calories, two.Calories);
 
 
 /////////////////////////////////////
@@ -132,7 +206,7 @@ BYOBurger tests:
 
     configuration instead of bools. pass BurgerTopping[] 
 
-
+    [InlineData(..., new BurgerTopping[]{BurgerTopping.Bacon, BurgerTopping.Ketchup})]
 
 /////////////////////////////
 
@@ -140,43 +214,50 @@ UML for Milestone 4.
 
 Relationships:
     Realization (is-a):
-        what for?
-        looks like?
-        where used?
+        what for? interfaces
+        looks like? dotted line, open arrow, points to interface
+        where used? Burger/Drink/IceCream/PickTwo implements IMenuItem
 
 
     Generalization (is-a):
-        what for? 
-        looks like?
-        where used?
+        what for? inheritance
+        looks like? solid line, open arrow, points to parent class
+        where used? ClassicCheeseburger extends Burger
+            (and for all individual menu items)
 
 
     Aggregation (has-a): 
-        what for? 
-        looks like?
-        where used?
+        what for? collection
+        looks like? open diamond, solid line, diamond touches collection
+        where used? PickTwo is a collection of IMenuItem
         multiplicities?
 
 
     Composition (has-a):
-        what for? 
-        looks like?
-        where used?
-        multiplicities?
+        what for? collection
+        looks like? closed diamond, solid line, diamond touches collection
+        where used? Order is a collection of IMenuItem,
+            Burger is collection of BurgerIngredient
+        multiplicities? 1 Order is a collection of 0..* IMenuItem
 
 
 
 
-Enums? 
+Enums? should show, but no relationships, put near class that uses
 
-ICollection? 
+ICollection? Order implements ICollection
 
-IngredientDatabase?
+IngredientDatabase? static (underline everything)
 
-BurgerIngredient?
+BurgerIngredient? show this, show that Burger is a collection of BurgerIngredient
 
-PickTwo?
+PickTwo? show collection
 
 How to organize?
-
+    IMenuItem interface, Burger/Drink/IceCream/PickTwo
+    Burger, all the burger stuff
+    IceCream section
+    Drink section
+    Order, ICollection, Order is collection of IMenuItem
+    IngredientDatabase
 
