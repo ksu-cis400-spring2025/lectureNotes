@@ -1,0 +1,70 @@
+Exam 1 is Wednesday, February 26 during class
+
+On paper, closed notes/computers
+
+No tutorials or milestone this week
+    (we'll start on the GUI with WPF next week)
+
+All previous tutorials and milestones must be submitted by Friday, September 27
+    --> regular "work day" on Friday if you need help finishing up
+        --> can also work on next week's module then
+
+
+Exam structure:
+- 5-10 multiple choice questions relating to the vocab words + general concepts
+- 5ish problems that involve writing code or drawing/interpreting UML
+
+//////////////////
+
+--> see Canvas modules for vocab list. Be familiar with when all are used.
+
+
+Major topics:
+
+- Encapsulation (writing general classes with fields/properties/methods/constructors,
+    creating and using objects)
+
+
+- Using properties (when private backing field is needed, enforcing bounds,
+    accessors, derived properties)
+
+
+- Interfaces: declaring an interface, implementing an interface, why we use
+
+
+- Inheritance: refactoring to have base/child classes, extending a class,
+    what is inherited, virtual, override, how constructors work, why we use
+
+
+- Abstract classes: declaring, extending, what is inherited, abstract vs virtual,
+    different from an interface
+
+
+- Writing unit tests (Fact, Theory, good test cases, Assert.Equal, Assert.Contains,
+    Assert.IsType<T>, Assert.IsAssignableFrom<T>, Assert.True, Assert.False,
+    using mock objects)
+    
+
+- Interpreting a UML diagram, drawing a UML diagram
+    --> include ALL members (private and protected too)
+    --> associations: 
+            realization 
+            aggregation/composition 
+            generalization 
+            
+    --> marking properties?
+        don't have to show bounds/default
+
+    --> static? 
+    --> abstract?  
+    --> showing an inherited member?
+
+
+
+
+
+//////////////////
+
+Work practice exam.
+
+(***See Exam material or Weekly class material in Canvas for practice exam solution***)

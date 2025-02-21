@@ -140,7 +140,7 @@ Example: ClassicCheeseburger
 
         set up burger with that configuration
 
-        Assert.All(prepInfo, info => b.PreparationInformation.Contains(info));
+        Assert.All(prepInfo, info => Assert.Contains(info, b.PreparationInformation));
 
         also test that the counts of prepInfo and b.PreparationInformation match
 
