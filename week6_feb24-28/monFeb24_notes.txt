@@ -11,7 +11,7 @@ All previous tutorials and milestones must be submitted by Friday, September 27
 
 
 Exam structure:
-- 5-10 multiple choice questions relating to the vocab words + general concepts
+- 5-10 multiple choice questions relating to vocab + general concepts
 - 5ish problems that involve writing code or drawing/interpreting UML
 
 //////////////////
