@@ -5,7 +5,7 @@ On paper, closed notes/computers
 No tutorials or milestone this week
     (we'll start on the GUI with WPF next week)
 
-All previous tutorials and milestones must be submitted by Friday, September 27
+All previous tutorials and milestones must be submitted by Friday, February 28
     --> regular "work day" on Friday if you need help finishing up
         --> can also work on next week's module then
 
@@ -28,12 +28,21 @@ Major topics:
 - Using properties (when private backing field is needed, enforcing bounds,
     accessors, derived properties)
 
+    public int Something {get; init;}
+
+    Exam e = new() {Something = 5};
+    
+
 
 - Interfaces: declaring an interface, implementing an interface, why we use
 
 
 - Inheritance: refactoring to have base/child classes, extending a class,
     what is inherited, virtual, override, how constructors work, why we use
+
+        public ParentClass(int num1) {...}
+
+        public ChildClass() : base(2) { ...}
 
 
 - Abstract classes: declaring, extending, what is inherited, abstract vs virtual,
@@ -46,18 +55,19 @@ Major topics:
     
 
 - Interpreting a UML diagram, drawing a UML diagram
-    --> include ALL members (private and protected too)
+    --> include ALL members (private and protected too, unless stated otherwise)
     --> associations: 
-            realization 
-            aggregation/composition 
-            generalization 
+            realization - interfaces, dotted line open arrow, points at interface
+            aggregation/composition - collection, diamond, diamond on class
+                doing the collecting, multiplicities
+            generalization - inheritance, solid line open arrow, points at parent
             
-    --> marking properties?
-        don't have to show bounds/default
+    --> marking properties? do not need to put default value or bounds
+        DO put accessors
 
-    --> static? 
-    --> abstract?  
-    --> showing an inherited member?
+    --> static? underline
+    --> abstract?  italicize 
+    --> showing an inherited member? 
 
 
 
