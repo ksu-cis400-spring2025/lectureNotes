@@ -1,16 +1,29 @@
 Exam 1 discussion.
 
+I curved by adding 2 points to all exams. 
 Across both sections:
 
-Average: ??/100
-High: ??/100
+Average: 78/100
+High: 101/100
 
-A (90-100): ?? students
-B (80-89): ?? students
-C (70-79): ?? students
-Below C: ?? students
+A (90-100): 11 students
+B (80-89): 16 students
+C (70-79): 23 students
+D (60-69): 8 students
+F (below 60): 4 students
 
 Discuss some problems.
+
+/////////////////////////////
+
+Milestone 3 discussion.
+
+- Burger base class: Calories, Price, PreparationInformation, Patties, Cheese,
+                    PossibleCheeses
+
+- Drink base class: Iced, Decaf, SizeChoice, Calories, Price
+
+- IceCream base class: Sauce, PossibleSauces, Scoops
 
 /////////////////////////////
 
