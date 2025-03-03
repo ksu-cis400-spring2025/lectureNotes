@@ -48,9 +48,10 @@ WPF applications consist of:
     or within another UserControl
 
 - Controls are laid out in layouts. Most common:
-    --> Grid
-    --> StackPanel 
-    --> DockPanel
+    --> Grid - grids/columns
+    --> StackPanel - puts things in a column or in a row
+    --> DockPanel - dock other elements to top/bottom/left/right
+        last added or undocked element will fill any remaining space
 
 When to use each?
 
@@ -125,12 +126,33 @@ Creating the MainWindow.
 
 What is DataContext? How does it work?
 
+    where data comes from that the user interface is displaying
 
 
 Order control should contain a ListView
     - what should our DataContext be?
 
-    - where should we set it?
+
+In your MainWindow constructor:
+
+    DataContext = new ObservableCollection<IMenuItem>();
+
+
+click event handler for buttons:
+
+<Button Name="CheeseBurgerButton" Click="NameOfEventHandler" ... />
+
+
+In click event handler:
+
+if (DataContext is ObservableCollection<IMenuItem> list) {
+    list.Add(...)
+
+}
+
+
 
 
     What does the "Binding" mean?
+
+
