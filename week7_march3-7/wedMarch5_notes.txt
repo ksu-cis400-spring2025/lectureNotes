@@ -1,0 +1,55 @@
+Milestone 5 due Friday.
+
+Demo.
+
+///////////////////////////////////
+
+Creating menu control
+    - what kind of layout?
+    - what kind of controls will you have?
+    - do you need to worry about spacing of other components?
+
+
+
+/////
+
+Creating order control
+    - what kind of layout?
+    - what kinds of controls will you have?
+    
+
+
+////
+
+Creating the MainWindow.
+    - how to lay out the menu and the order summary?
+    - how to get the buttons on the bottom?
+
+    Adding a custom control:
+
+    <local:YourControlClass/>
+
+    (can specify properties like Grid.Row, etc. as usual)
+
+
+////
+
+What is the data again? Where to set DataContext?
+
+How to write click event handler?
+
+
+How to set the click event handler?
+
+
+////
+
+Overriding ToString
+
+////
+
+Updating UML
+
+////
+
+Testing ToString
