@@ -1,12 +1,11 @@
 Milestone 5 due Friday.
 
-Demo.
 
 ///////////////////////////////////
 
 Creating menu control
-    - what kind of layout?
-    - what kind of controls will you have?
+    - what kind of layout? Grid
+    - what kind of controls will you have? Button, TextBlock
     - do you need to worry about spacing of other components?
 
 
@@ -14,8 +13,8 @@ Creating menu control
 /////
 
 Creating order control
-    - what kind of layout?
-    - what kinds of controls will you have?
+    - what kind of layout? DockPanel or Grid
+    - what kinds of controls will you have? TextBlocks, ListView
     
 
 
@@ -23,7 +22,13 @@ Creating order control
 
 Creating the MainWindow.
     - how to lay out the menu and the order summary?
+        recommend 2x2 grid, big top row, big left column
+        menu in spot 0,0
+        order in row 0, column1 ...RowSpan="2"
+
     - how to get the buttons on the bottom?
+        add a grid to that spot (row 1, col 0)
+        inner grid: 1 row, 3 columns
 
     Adding a custom control:
 
@@ -34,22 +39,77 @@ Creating the MainWindow.
 
 ////
 
-What is the data again? Where to set DataContext?
+DataContext - what data the user interface is displaying
 
-How to write click event handler?
+What is the data again? Where to set DataContext?
+    in MainWindow constructor
+
+    DataContext = new ObservableCollection<IMenuItem>();
+
+
+How to write click event handler? in menu selection code-behind
+
+    private void MenuItemClick(object sender, RoutedEventArgs e) {
+        //figure out which button was clicked
+        if (sender is Button b) {
+            if (DataContext is ObservableCollection<IMenuItem> list) {
+                if (b.Name == "BYOButton") {
+                    list.Add(new BYOBurger());
+                }
+            }
+        }
+            
+
+        //add a menu item corresponding to that button to my DataContext
+    }
 
 
 How to set the click event handler?
 
+<Button Name="BYOButton"... Click="MenuItemClick">Build-Your-Own Burger</Button
 
 ////
 
 Overriding ToString
+    just override in Burger, IceCream, Drink, PickTwo
 
 ////
 
 Updating UML
+    each window/user control becomes a box in the UML
+
+    MainWindow HAS A (composition) menu selection control and HAS AN order summary control
+        diamond touches MainWindow, mult. 1 to 1
+
+    MainWindow extends System.Windows.Window
+        make box for System.Windows.Window
+        solid line, arrow pointing to System.Windows.Window
+
+    similarly, user controls
+
+    add ToString to the base classes in the data library
+
+    show that MainWindow HAS A collection of IMenuItem
+        diamond on MainWindow, mult. 1 to (0..*) IMenuItem
+
+    need to indicate TWO projects: Data, PointOfSale:
+        1) one big page, use "package" uml label 
+            put as big border around all Data classes, label DairyBarn.Data
+            similar, different package label for DairyBarn.PointOfSale
+        2) OR, add a second page. Label first page DairyBarn.Data,
+            second page DairyBarn.PointOfSale
+
+
+how show that MainWindow HAS A collection of IMenuItem
+    copy IMenuItem, paste it next to MainWindow
+    relabel IMenuItem as DairyBarn.Data.IMenuItem
 
 ////
 
 Testing ToString
+
+in every menu item unit test file, add a Fact for testing ToString:
+
+    Assert.Equal("whatever ", obj.ToString());
+
+    (or use obj.Name)
