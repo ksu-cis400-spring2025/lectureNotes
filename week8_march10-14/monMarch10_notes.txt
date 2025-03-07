@@ -1,0 +1,188 @@
+Data binding part 1: due tonight
+    (NOTE: there is a mistake when handling remove in the tutorial
+    - read the Canvas assignment for the correction)
+
+Data binding part 2: due Tuesday
+
+Milestone 6: due Friday
+
+--> I'll post the week 9 module on Friday *just in case*
+    you want to work over spring break
+
+    (none of it is due until the week after spring break)
+
+///////////////////////////////////
+
+See MS 6 demo.
+
+
+Milestone 6 summary:
+
+- Use Order as DataContext (requires some changes to Order)
+- Display name and price of each menu item in the order summary
+- Subtotal/tax/total are automatically updated as items are added
+- Cancel order is implemented
+- Remove item is implemented
+
+//////////////////////////////////
+
+Data binding.
+
+Idea: front end display is bound to back end data. Changing one changes both.
+
+
+
+- Controls have a DataContext
+- an attribute in a control can be bound to a property in the control's DataContext
+
+
+In a control, can do something like:
+    Text = "{Binding PropertyName}"
+
+    or:
+        Text = "{Binding Path=PropertyName}"
+
+
+    or (if DataContext is an IEnumerable):
+        ItemsSource="{Binding}"
+
+
+--> control will see if its DataContext has property called PropertyName
+    --> if it does, it displays PropertyName
+    --> if it doesn't, it displays nothing (no errors)
+
+
+
+Remember that different controls *can* have different DataContexts.
+
+If they don't define their own, they "inherit" the DataContext of the
+    control they were added to
+
+
+//////////////////////////////////
+
+Number property.
+
+- Want first order to be 1
+
+- Next order to be 2
+
+- Etc.
+
+
+Solution:
+
+
+
+//////////////////////////////////
+
+PlacedAt property.
+    - Type is DateTime
+    - get-only
+    - initialize to *now* (DateTime.Now)
+
+
+How to write?
+
+
+
+
+
+
+//////////////////////////////////
+
+INotifyCollectionChanged interface
+    public event NotifyCollectionChangedEventHandler? CollectionChanged;
+
+
+This is an *event handler*
+
+We can invoke CollectionChanged when the contents of a collection change 
+    - when a collection is bound to a ListView, WPF automatically listens
+        for CollectionChanged events
+    - it attaches its own handler to CollectionChanged, which contains code 
+        to redraw the GUI
+
+
+CollectionChanged?.Invoke(...)
+
+    - see Data Binding Tutorial 1
+    
+
+
+--> when does the collection itself change?
+
+
+////////////////////////////
+
+What to do in DairyBarn?
+
+In Order:
+
+
+In MainWindow:
+
+
+
+In Order summary XAML:
+
+
+
+
+In menu selection code-behind:
+
+
+
+
+
+///////////////////////////
+
+Implementing Cancel Order button.
+
+
+
+How to do this?
+
+
+
+///////////////////////////
+
+Displaying name/price/remove capability of each item in Order Summary:
+
+<ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding}">
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            
+            
+
+
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
+
+
+
+
+
+//////////////////////////
+
+Write the remove click event handler in order summary code-behind:
+
+
+
+What is DataContext?
+
+What is sender? 
+
+What is sender's DataContext?
+
+How to remove?
+
+///////////////////////////
+
+On Wednesday: 
+- Implementing INotifyPropertyChange
+- UML changes
+- Testing changes
+
+
