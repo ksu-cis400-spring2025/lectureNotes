@@ -77,6 +77,18 @@ Number property.
 
 Solution:
 
+    private static uint _nextOrderNumber = 1;
+    private uint _orderNumber = _nextOrderNumber++;
+    public uint Number => _orderNumber;
+
+Order o = new();
+Console.WriteLine(o.Number);
+Console.WriteLine(o.Number);
+Console.WriteLine(o.Number);
+
+Order o2 = new();
+
+
 
 
 //////////////////////////////////
@@ -89,6 +101,7 @@ PlacedAt property.
 
 How to write?
 
+public DateTime PlacedAt {get;} = DateTime.Now;
 
 
 
@@ -114,40 +127,51 @@ CollectionChanged?.Invoke(...)
     - see Data Binding Tutorial 1
     
 
+public class Order : INotifyCollectionChanged  ... {
 
---> when does the collection itself change?
+
+}
+
+
+--> when does the collection itself change? Order's Add, Remove, Clear
 
 
 ////////////////////////////
 
-What to do in DairyBarn?
-
-In Order:
+What to do in PointOfSale?
 
 
-In MainWindow:
+In MainWindow: 
+    constructor set DataContext to an Order
+
+    click event handler for cancel order button
+    XAML: Click = "Something" (cancel button)
+    Code-behind: 
+        private void Something(object sender, RoutedEventArgs e) {
+            //get DataContext as an Order
+            //call Clear on the Order
+        }
 
 
 
 In Order summary XAML:
+    order number / time stamp / subtotal/ tax / total are coming from Order
+
+    <TextBlock Text="{Binding PlacedAt, StringFormat='Date: {0}'}"/>
 
 
+    <TextBlock Text="{Binding Subtotal, StringFormat='{}{0:C}'}"/>
+
+
+    <ListView ItemsSource="{Binding}"/>
 
 
 In menu selection code-behind:
 
+click event for menu items
 
-
-
-
-///////////////////////////
-
-Implementing Cancel Order button.
-
-
-
-How to do this?
-
+now: if (DataContext is ObservableCollection<IMenuItem> list)
+change to looking for new DataContext
 
 
 ///////////////////////////
@@ -157,10 +181,14 @@ Displaying name/price/remove capability of each item in Order Summary:
 <ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding}">
     <ListView.ItemTemplate>
         <DataTemplate>
-            
-            
+            <StackPanel>
+                //now have TextBlock for item's name, price
+                <TextBlock Text="{Binding Name}/>
 
+                //have remove button
+                <Button Click="HandleRemove">Remove</Remove>
 
+            </StackPanel>
         </DataTemplate>
     </ListView.ItemTemplate>
 </ListView>
@@ -173,15 +201,25 @@ Displaying name/price/remove capability of each item in Order Summary:
 
 Write the remove click event handler in order summary code-behind:
 
+private void HandleRemove(object sender, RoutedEventArgs e) {
+    //remove the item associated with this button from
+    //the order
+
+    DataContext
+}
 
 
-What is DataContext?
 
-What is sender? 
+What is DataContext? Order
 
-What is sender's DataContext?
+What is sender? the specific remove button that was clicked
 
-How to remove?
+What is sender's DataContext? the menu item corresponding to the remove
+    convert sender to a button, then get its DataContext
+
+
+How to remove? convert DataContext to an Order, call remove
+    with that menu item
 
 ///////////////////////////
 
