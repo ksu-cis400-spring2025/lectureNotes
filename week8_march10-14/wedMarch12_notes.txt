@@ -1,0 +1,86 @@
+Milestone 6 due Friday
+
+Will publish next module Friday (w/ Milestone 7) in case you want
+    to start over break (nothing due until week after break)
+
+//////////////////////////
+
+Today:
+- formatting ListView
+- INotifyPropertyChanged
+- Testing
+- UML
+
+/////////////////////////
+
+Displaying name/price/remove capability of each item in Order Summary:
+
+<ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding}">
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <StackPanel>
+                //now have TextBlock for item's name, price
+                <TextBlock Text="{Binding Name}"/>
+
+                //have remove button
+                <Button Click="HandleRemove">Remove</Button>
+
+            </StackPanel>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
+
+How to get name/price to stretch?
+
+/////////////////////////////
+
+Need order summary to update subtotal/tax/total as you add/remove items
+
+Answer: Order implements INotifyPropertyChanged
+
+
+public event PropertyChangedEventHandler? PropertyChanged;
+
+
+Need to invoke PropertyChanged whenever something happens that changes
+    the value of a property
+
+
+PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PropertyName)));
+
+
+--> user controls are subscribed to the PropertyChanged event for their DataContext
+    --> if the control uses data binding with the affected property, it
+        will automatically rerender itself
+
+
+
+When do we need to invoke PropertyChanged? For what properties?
+
+
+
+Also: TaxRate
+
+/////////////////////////
+
+Testing.
+
+--> make sure Order number increases by 1 each time
+
+--> make sure Number/PlacedAt don't change when requested more
+    than once
+
+--> make sure Order implements INotifyCollectionChanged, INotifyPropertyChanged
+
+--> make sure Order invokes PropertyChanged when it should
+
+Example:
+
+[Fact]
+public void SubtotalChangesWhenAdding() {
+
+}
+
+////////////////////
+
+UML?
