@@ -183,10 +183,10 @@ Displaying name/price/remove capability of each item in Order Summary:
         <DataTemplate>
             <StackPanel>
                 //now have TextBlock for item's name, price
-                <TextBlock Text="{Binding Name}/>
+                <TextBlock Text="{Binding Name}"/>
 
                 //have remove button
-                <Button Click="HandleRemove">Remove</Remove>
+                <Button Click="HandleRemove">Remove</Button>
 
             </StackPanel>
         </DataTemplate>
