@@ -19,8 +19,9 @@ Displaying name/price/remove capability of each item in Order Summary:
     <ListView.ItemTemplate>
         <DataTemplate>
             <StackPanel>
-                //now have TextBlock for item's name, price
-                <TextBlock Text="{Binding Name}"/>
+                // how to get name, price text blocks on same line?
+
+                //how to get the alignment?
 
                 //have remove button
                 <Button Click="HandleRemove">Remove</Button>
