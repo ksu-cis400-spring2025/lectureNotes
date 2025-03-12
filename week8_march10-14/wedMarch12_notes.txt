@@ -19,11 +19,11 @@ Displaying name/price/remove capability of each item in Order Summary:
     <ListView.ItemTemplate>
         <DataTemplate>
             <StackPanel>
-                // how to get name, price text blocks on same line?
-
-                //how to get the alignment? use DockPanel
-                    dock the price to the right
-                    dock the name to left
+                //how to get the alignment of name/price?
+                <DockPanel>
+                    have price, dock to right
+                    have name, dock to left
+                </DockPanel>
 
                 //have remove button
                 <Button Click="HandleRemove">Remove</Button>
@@ -48,11 +48,8 @@ public event PropertyChangedEventHandler? PropertyChanged;
 Need to invoke PropertyChanged whenever something happens that changes
     the value of a property
 
-    Add, Remove, Clear
+    
 
-    Add:
-        Subtotal, Tax, Total
-        invoke AFTER adding the item
 
 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PropertyName)));
 
@@ -64,11 +61,15 @@ PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PropertyName))
 
 
 When do we need to invoke PropertyChanged? For what properties?
+    Add, Clear, Remove
 
+    impacts: Subtotal, Tax, Total
+    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PropertyName)));
 
 
 Also: TaxRate
-    changes: Total, Tax, TaxRate
+    tax rate changes impact: Tax, Total, TaxRate
+
 
 /////////////////////////
 
@@ -76,16 +77,18 @@ Testing.
 
 --> make sure Order number increases by 1 each time
 
-    Order o = new();
+    Order o1 = new();
     Order o2 = new();
-    check that o2's number is 1 bigger than o's number
+    assert o1's number +1 is o2's number
+
 
 
 --> make sure Number/PlacedAt don't change when requested more
     than once
 
-    int curNum = o.Number;
-    assert curNum equals o.Number
+    save out the Number in a variable
+    assert that the variable matches current Number
+
 
 --> make sure Order implements INotifyCollectionChanged, INotifyPropertyChanged
 
@@ -99,17 +102,19 @@ public void SubtotalChangesWhenAdding(string property) {
     Order o = new();
     Assert.PropertyChanged(o, property, () => {
         o.Add(new MockMenuItem());
-    })
+    });
 }
 
-for add, also tax and total
+test remove, clear
+
+also test tax rate: only difference is code in assert should change tax rate
 
 ////////////////////
 
 UML?
-    PointOfSale: add click events 
-        show MainWindow has a DairyBarn.Data.Order
-    Data: Order
-        Number, PlacedAt
-        implements INotifyCollectionChanged, INotifyPropertyChanged
+    PointOfSale - remove click event, cancel click event
+        show that MainWindow has an DairyBarn.Data.Order 
+    Data - Order
+        implementing 2 new interfaces 
         list the two events
+        new properties (PlacedAt, Number)
