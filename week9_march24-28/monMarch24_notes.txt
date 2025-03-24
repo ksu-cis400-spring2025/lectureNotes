@@ -31,15 +31,27 @@ Steps to send message from one control to another.
 
 Step 1: think about what information needs to be sent (might be nothing). If needed:
 
+string of the color to display
+
+create a custom event args class that extends RoutedEventArgs
+
+public class CustomEventArgs : RoutedEventArgs{
+    //create a property for my information to send
+}
 
 
 
 Step 2: in the class where the action takes place:
 
+define a custom event of our custom event args type
+
+public event EventHandler<CustomEventArgs>? EventName;
 
 
 
 Step 3: whenever you want to send your message, invoke your custom event
+
+EventName?.Invoke(this, new CustomEventArgs(params));
 
 
 
@@ -47,14 +59,20 @@ Step 3: whenever you want to send your message, invoke your custom event
 Step 4: in the class where you want to handle the event, create an event handler
     for an event with those custom event args
 
+in MainWindow
 
+private void HandleEvent(object? sender, CustomEventArgs e) {
+
+}
 
 
 
 Step 5: in the class where you want to handle the event, attach your custom
     event handler to the event from the control sending the message
 
+MainWindow
 
+ControlName.EventName += HandleEvent;
 
 
 /////////////////
@@ -78,12 +96,15 @@ Custom event steps in MS7:
 1) Make a custom event args class that extends RoutedEventArgs. It should
     contain the info needed about the event. (What is needed?)
 
-    
+    IMenuItem
 
 
 
 2) Declare an event with your custom args in the class where the action will happen
     (where is this?) 
+
+
+        menu selection control
 
 
 
@@ -96,12 +117,18 @@ Custom event steps in MS7:
 
 
 
+
+
+
+
     if (button pressed was WinterSwirl) {
         order.Add(new WinterSwirl());
         CustomEvent?.Invoke(this, new CustomEventArgs(new WinterSwirl()));
 
-        //is this the right idea?
+        //is this the right idea? NO! use the same object in both places
     }
+
+
 
 
 
@@ -109,11 +136,25 @@ Custom event steps in MS7:
     method that takes a sender and a custom args. Do whatever is needed.
     (where should the event handler be? what should it do?)
 
+    MainWindow, write a custom event handler (similar to HandleColorClick)
+
+        make the menu control not visible (hidden)
+        e.MenuItem (will be the IMenuItem for your custom event args)
+            - do conditional statement to display corresponding cusomization control
+
+        (whatever customization control).DataContext = e.MenuItem;
+
 
 
 
 5) In the same class as #4, attach your event handler to the event in #2
     (where to do this?)
+
+    attach your custom event to your menu control in the main window constructor
+
+    (may need to give it a name in the XAML)
+
+
 
 
 
@@ -122,15 +163,16 @@ Custom event steps in MS7:
 Recommended order of approach:
 
 
+1) Load your enums as custom resources - like Tuesday's tutorial
+
+
 In Data:
-
-1) Load your enums as custom resources 
-
 
 2) Mark that IMenuItem implements INotifyPropertyChanged
 
 
 3) Declare PropertyChanged event in all parent classes (Burger, Drink,IceCream, PickTwo)
+
 
 
 4) Put protected helper method in all abstract classes
@@ -149,13 +191,27 @@ In Data:
 
         Coffee.
             DrinkSize affects?: 
+                Calories, Price, PreparationInformation, DrinkSize
+
                 what to do in DrinkSize set?
+                    OnPropertyChanged for each of the above properties
+
+                    public SizeType DrinkSize {get; set;}
+                    can't use above auto property syntax - use private backing field,
+                        expand
 
             Cream affects?
+                Calories, PreparationInformation, Cream
 
-        WinterSwirl.
+            Sugar affects?
+                Calories, PreparationInformation, Sugar
+            
+            Iced affects?
+                PreparationInformation, Iced
 
-        Burgers.
+            Decaf affects?
+                PreparationInformation, Decaf, Calories
+
 
 
 

@@ -23,6 +23,14 @@ namespace EventExample
         public MainWindow()
         {
             InitializeComponent();
+
+            MyControl.ColorEvent += HandleColorClick;
+        }
+
+        private void HandleColorClick(object? sender, ColorEventArgs e)
+        {
+            //display red or blue in the text block
+            ColorText.Text = e.ColorInfo;
         }
     }
 }

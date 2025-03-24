@@ -20,6 +20,9 @@ namespace EventExample
     /// </summary>
     public partial class ColorControl : UserControl
     {
+        //custom event
+        public event EventHandler<ColorEventArgs>? ColorEvent;
+
         public ColorControl()
         {
             InitializeComponent();
@@ -27,7 +30,19 @@ namespace EventExample
 
         public void ClickColor(object sender, RoutedEventArgs e)
         {
-            
+            if (sender is Button b)
+            {
+                if (b.Name == "RedButton")
+                {
+                    //invoke my custom event
+                    ColorEvent?.Invoke(this, new ColorEventArgs("Red"));
+                }
+                else if (b.Name == "BlueButton")
+                {
+                    //invoke my custom event
+                    ColorEvent?.Invoke(this, new ColorEventArgs("Blue"));
+                }
+            }
         }
     }
 }
