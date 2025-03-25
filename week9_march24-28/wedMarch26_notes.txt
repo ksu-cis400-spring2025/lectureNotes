@@ -1,0 +1,52 @@
+Milestone 7 due Friday
+
+See Monday's notes for a suggested order of approach
+
+////////////////////////////
+
+Burger customization.
+
+- just ONE control to use for all burgers
+- customize cheese, patties, veggie
+
+--> how to display the cheeses?
+
+
+
+
+--> in MainWindow, how to tell if we should display burger
+    customization?
+
+
+    
+
+///////////////////////////
+
+Ice cream / drink customization.
+
+--> if you want, *can* create a helper control with shared info
+    e.g., decaf/iced/size for drinks 
+
+    and then place it on a custom control
+
+///////////////////////////
+
+How to make Order properties change when items are customized?
+
+In Add, attach to item's PropertyChanged:
+
+
+
+
+--> then what to do? 
+
+
+
+--> what to do in Remove, Clear? remove the event handler for those items
+
+
+
+
+///////////////////////////////
+
+What if your drink/ice cream used a dictionary of toppings?
