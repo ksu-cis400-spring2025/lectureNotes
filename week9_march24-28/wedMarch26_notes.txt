@@ -68,19 +68,24 @@ Coffee, for example
 
 maybe in Drink, inner DrinkIngredient class with an Included property
 
-maybe in Drink, Dictionary<key, DrinkIngredient>
+maybe in Drink, Dictionary<AddOnType, DrinkIngredient> AddOns
+
+
+1) In Coffee class, make a property for each customizable add-on
+    that interacts with this dictionary. Like this for cream:
+
+public bool Cream
+{
+    get => AddOns[AddOnType.Cream].Included; //(basically, return the “included” value for the dictionary entry corresponding to cream)
+    set
+    {
+        //change the included value corresponding to this add-on
+        AddOns[AddOnType.Cream].Included = value;
+        
+        //now, invoke PropertyChanged for each property that is impacted
+        //by cream changing
+    }
+}
 
 In coffee customization control
-    for cream: check box, Checked="{Binding DrinkIngredients[Drink.Cream].Included}"
-
-
- Make your DrinkIngredient class implement INotifyPropertyChanged
-
-       in Included's set, invoke PropertyChanged
-
-In Drink, make sure you do something like:
-
-    (DrinkIngredient).PropertyChanged += MyHelperMethod;
-
-    Write event handler MyHelperMethod, where you invoke your own PropertyChanged
-        for calories price, etc.
+    for cream: check box, Checked="{Binding Cream}"

@@ -1,0 +1,229 @@
+Programmatic controls tutorial: due Monday
+MVVM tutorial: due Tuesday
+Milestone 8: due Friday
+
+
+//////////////////
+
+See Milestone 8 demo
+
+//////////////////
+
+Summary of requirements:
+- Add ingredient customization to burgers
+- Add "pick two" functionality
+- Implement "complete order"
+
+/////////////////
+
+Ingredient customization.
+
+- Still use ONE Burger control for all burgers
+- You should have a Dictionary<BurgerTopping, BurgerIngredient>
+    --> this should contain ONLY those ingredients allowed for a particular burger 
+
+
+///////////////
+
+For burgers, want to display all possible ingredients
+    --> each item should have a check box / name of ingredient
+
+
+Two ways to populate:
+    1) Use same approach as programmatic controls video to add the check boxes
+        in the code-behind for the Burger control 
+            --> call this method when you display the control
+            --> you will also need to clear the check boxes when you display
+                the control again 
+
+
+
+    2) In Burger control XAML, make a ListView whose ItemsSource binds to your
+        list of BurgerIngredients. 
+
+            ItemsSource="{Binding AllIngredients.Values}"
+        
+        
+        You can make a custom data template (like we did in
+        order summary) where you display a check box and TextBlock for each item
+
+
+        --> what would the DataContext of an item in the ListView be?
+
+
+        --> what would that mean we could bind to?
+            check box's IsChecked?
+            TextBlock's Text?
+
+
+////////////////////
+
+Handling PropertyChanged.
+
+--> BurgerIngredient implements INotifyPropertyChanged
+
+    when to invoke?
+
+
+
+--> How to make sure Burger's properties change when ingredients change?
+
+
+
+
+
+///////////////////
+
+Pick Two
+
+- Add "Add to Pick Two" button to Burger control
+- When that button is clicked, you should:
+    - remove that item from the Order
+    - add a PickTwo with the burger as the burger choice to the Order
+    - hide the Burger customization screen
+    - display the pick two customization screen
+
+
+You want to send a message from the PickTwo control to MainWindow
+
+How to do this? 
+
+
+
+(at some point, make "Add to Pick Two" button hidden if the burger is part 
+of a pick two...but don't worry about this until last)
+
+///////////////////
+
+PickTwo customization.
+
+--> what does PickTwo need to do with PropertyChanged?
+
+
+
+- Want to display:
+
+    Selected burger. Option to edit burger. Option to pick new burger.
+    Selected ice cream. Option to edit ice cream. Option to pick new ice cream.
+
+////
+
+Think about just burger selection first.
+
+In PickTwo, create List<Burger> BurgerTypes property. Add:
+    - the current BurgerChoice
+    - instances of every other kind of burger (except BurgerChoice)
+
+
+
+
+What to do in BurgerChoice set?
+
+    public Burger BurgerChoice {
+        get ...
+        set {
+            detach my custom event handler from _burgerChoice
+
+            _burgerChoice = value;
+            _burgerChoice.PropertyChanged += MyCustomEventHandler;
+
+            invoke PropertyChanged for Price, Calories, PreparationInformation,
+                BurgerChoice, BurgerTypes (easy way to reset to new instance
+                    of old selected burger)
+        }
+    }
+
+
+MyCustomEventHandler should invoke PropertyChanged for Price, Calories, PreparationInformation
+
+
+In ComboBox for burger selection:
+    - ItemsSource = BurgerTypes
+    - SelectedItem = BurgerChoice
+
+
+
+
+(One hiccup: ComboBox binding will cause SelectedItem [BurgerChoice] to be set
+when the items [BurgerTypes] change, which invokes PropertyChanged for BurgerTypes,
+which causes the combo box items to change again, etc....stack overflow
+
+Fix: only do the BurgerChoice set if the value is different from _burgerChoice)
+
+
+
+What should PickTwo's "Edit burger" button do?
+    bring up customization screen for that burger
+
+    custom event between PickTwo customization control and MainWindow
+
+
+(now do same for ice cream)
+
+//////////////////
+
+
+MVVM - Model-View-ViewModel
+
+--> common design pattern (esp. in mobile/web dev, but also desktop) similar
+    to MVC
+
+- Model holds the Data 
+- View is the XAML (ideally, with minimal code in the code-behind)
+- ViewModel handles the logic for the view -- it is the go-between
+    - ViewModel has an instance of the Model
+    - It exposes Model properties and/or includes additional properties with
+        logic about what should be displayed
+    - It serves as the DataContext for the View (so the View binds to
+        properties in the ViewModel)
+
+
+--> in full MVVM, each control would have a separate ViewModel. Instead of
+    click, etc. events in the code-behind, we would use Commands
+    (similar idea [still occur with particular actions] but invokes methods 
+    in the ViewModel that in turn would change our properties)
+
+
+///////////////////
+
+Payment control.
+
+- display final costs, allow user to enter payment info 
+- (will discuss data validation on Wednesday)
+
+PaymentViewModel:
+    - holds an Order instance
+    - is the DataContext for PaymentControl
+    - Contains properties for PaymentControl to bind to:
+        --> What to "pass through" from order?
+
+            public decimal Subtotal => _order.Subtotal;
+
+
+        --> What new properties?
+
+            Change, PaymentAmount
+
+
+
+        --> property for whether a control is enabled?
+            IsEnabled="{Binding EnoughFunds}"
+
+
+        public bool EnoughFunds ...
+
+        --> property for text of an error message?
+            return "" if enough funds, otherwise return the error message
+
+
+    --> if we are binding to (changing!) properties in PaymentViewModel,
+        what does PaymentViewModel need to do so we get the changes?
+
+view model implements INotifyPropertyChanged
+    in set for the payment amount, invoke PropertyChanged for:
+        change, the message, bool EnoughFunds property, payment amount itself
+
+
+////////////////////
+
+Wednesday: discuss data validation
