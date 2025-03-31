@@ -7,8 +7,6 @@ Milestone 8: due Friday
 
 See Milestone 8 demo
 
-
-"..\..\receipts.txt"
 //////////////////
 
 Summary of requirements:
@@ -43,7 +41,8 @@ Two ways to populate:
     2) In Burger control XAML, make a ListView whose ItemsSource binds to your
         list of BurgerIngredients. 
 
-            ItemsSource="{Binding AllToppings.Values}"
+        ItemsSource="{Binding AllToppings.Values}"
+
         
         
         You can make a custom data template (like we did in
@@ -51,7 +50,7 @@ Two ways to populate:
 
 
         --> what would the DataContext of an item in the ListView be?
-            BurgerIngredient
+            BurgerIngredients
 
 
         --> what would that mean we could bind to?
@@ -66,26 +65,21 @@ Handling PropertyChanged.
 --> BurgerIngredient implements INotifyPropertyChanged
 
     when to invoke?
-        in BurgerIngredient's Included's set
-        (say that the Included property has changed)
-
-
+        in Included's set, invoke PropertyChanged
 
 --> How to make sure Burger's properties change when ingredients change?
 
-    in Order's Add, we did: item.PropertyChanged += SomeMethod;
-
-    do something similar for Burger/BurgerIngredient
-
-    in each burger constructor, attach your event handler:
-
-    loop over the burger ingredients
-        ing.PropertyChanged += HandleIngredientChanged;
+in Order's Add, milestone 7:
+    item.PropertyChanged += HandleItemChanged;
 
 
-    now write an event handler called HandleIngredientChanged
-        say that Burger's Price, PreparationInformation, Calories
-        have changed
+should work (usually) to put in burger constructors:
+    loop over AllToppings.Values
+        ing.PropertyChanged += HandleIngredientChanged
+
+
+write HandleIngredientChanged event handler:
+    invoke PC Calories, Price, PreparationInformation
 
 ///////////////////
 
@@ -94,15 +88,18 @@ Pick Two
 - Add "Add to Pick Two" button to Burger control
 
 --> will need a custom event in burger control
+    invoke it in the Add to PickTwo click event
+
 --> write and attach a custom event handler to that event in MainWindow
 
-- When that button is clicked, you should: ???
-    - invoke your event (include information about the burger)
-    - in MainWindow's event handler:
-        - remove that item from the order
-        - add to order: a pick two with the specific burger
-        - make your pick two display visible
-        - pick two's DataContext should be the new pick two
+    in MainWindow's custom event handler:
+        remove the burger from the order
+        create a new PickTwo with the burger as the BurgerChoice
+        add that PickTwo to the order
+
+        burger control is hidden 
+        pick two control is visible
+        set pick two control's DataContext to be the new PickTwo 
 
 
 
@@ -123,10 +120,13 @@ PickTwo customization.
 - Want to display:
 
     Selected burger. Option to edit burger. Option to pick new burger.
+        bind to BurgerChoice's name, etc.
+
     Selected ice cream. Option to edit ice cream. Option to pick new ice cream.
 
 
-
+recommend combo box's items bound to a list of burger instances
+    it's selected item bound to BurgerChoice
 
 
 ////
@@ -137,6 +137,8 @@ In PickTwo, create List<Burger> BurgerTypes property. Add:
     - the current BurgerChoice
     - instances of every other kind of burger (except BurgerChoice)
 
+        if (BurgerChoice is not VeggieBurger) add new VeggieBurger
+
 
 
 
@@ -145,20 +147,20 @@ What to do in BurgerChoice set?
     public Burger BurgerChoice {
         get ...
         set {
-            if (_burgerChoice != value) {
-                _burgerChoice.PropertyChanged -= HandleItemChanged;
-            _burgerChoice = value;
+            if (value != _burgerChoice) {
+                _burgerChoice.PropertyChanged -= HandleBurgerChanged;
+                _burgerChoice = value;
+                _burgerChoice.PropertyChanged += HandleBurgerChanged;
 
-            _burgerChoice.PropertyChanged += HandleItemChanged;
-
-            invoke PC for Price, BurgerChoice, Calories, PreparationInformation,
-                BurgerTypes
+                invoke PC for Price, Calories, PreparationInformation, 
+                    BurgerChoice, BurgerTypes     
             }
+            
         }
     }
 
 
-What should custom event handler do? (HandleItemChanged)
+What should custom event handler do? (HandleBurgerChanged)
     invoke PC Price, Calories, PreparationInformation
 
 
@@ -178,8 +180,10 @@ Fix: only do the BurgerChoice set if the value is different from _burgerChoice
 
 
 What should PickTwo's "Edit burger" button do? How to accomplish?
-    I want MainWindow to display the burger control
-    another custom event, invoke in the click, listen to in main
+    another custom event in pick two control
+    invoke in the Edit burger click
+    listen to in MainWindow
+        event handler in MainWindow: displaying the burger customization control
 
 
 
@@ -191,9 +195,9 @@ What should PickTwo's "Edit burger" button do? How to accomplish?
 MVVM - Model-View-ViewModel
 
 --> common design pattern (esp. in mobile/web dev, but also desktop) similar
-    to MVC
+    to MVC (model, view, controller)
 
-- Model holds the Data 
+- Model holds the Data  (the whole Data project is our model)
 
 - View is the XAML (ideally, with minimal code in the code-behind)
 
@@ -229,42 +233,43 @@ PaymentViewModel:
 
 
         --> What new properties?
-            Change 
-            PaymentAmount
-
+                Change, PaymentAmount 
 
 
 
 
         --> property for whether a control is enabled?
 
-            public bool ValidFunds 
-                (compare PaymentAmount to Total, return a bool)
+            public bool ValidFunds
+                (return whether PaymentAmount >= Total)
 
-            IsEnabled = "{Binding ValidFunds}"
-
+                IsEnabled="{Binding ValidFunds}"
 
         --> property for text of an error message?
 
             public string ErrorMessage
-                return "insufficient ..." if not enough funds 
-                else, return ""
-            
+                return "insufficient ..." if not enough funds
+                else return ""
 
-
+                TextBlock on the XAML, bind its Text to ErrorMessage
 
 
     --> if we are binding to (changing!) properties in PaymentViewModel,
         what does PaymentViewModel need to do so we get the changes?
 
-        implement INotifyPropertyChanged
-
-        in PaymentAmount's set, invoke PC for:
-            PaymentAmount, Change, ValidFunds, ErrorMessage
+the payment amount text box will be bound to 
+    PaymentAmount property in the view model
 
 
+as user edits, automatically calls set for PaymentAmount
+
+_paymentAmount = value;
 
 
+
+PaymentViewModel needs to implement INotifyPropertyChanged
+
+in the PaymentAmount set, invoke PC for: Change, ValidFunds, ErrorMessage, PaymentAmount
 
 ////////////////////
 
