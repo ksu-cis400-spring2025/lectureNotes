@@ -7,6 +7,8 @@ Milestone 8: due Friday
 
 See Milestone 8 demo
 
+
+"..\..\receipts.txt"
 //////////////////
 
 Summary of requirements:
@@ -49,11 +51,12 @@ Two ways to populate:
 
 
         --> what would the DataContext of an item in the ListView be?
+            BurgerIngredient
 
 
         --> what would that mean we could bind to?
-            check box's IsChecked?
-            TextBlock's Text?
+            check box's IsChecked? Included
+            TextBlock's Text? Name
 
 
 ////////////////////
@@ -63,22 +66,43 @@ Handling PropertyChanged.
 --> BurgerIngredient implements INotifyPropertyChanged
 
     when to invoke?
+        in BurgerIngredient's Included's set
+        (say that the Included property has changed)
 
 
 
 --> How to make sure Burger's properties change when ingredients change?
 
+    in Order's Add, we did: item.PropertyChanged += SomeMethod;
+
+    do something similar for Burger/BurgerIngredient
+
+    in each burger constructor, attach your event handler:
+
+    loop over the burger ingredients
+        ing.PropertyChanged += HandleIngredientChanged;
 
 
-
+    now write an event handler called HandleIngredientChanged
+        say that Burger's Price, PreparationInformation, Calories
+        have changed
 
 ///////////////////
 
 Pick Two
 
 - Add "Add to Pick Two" button to Burger control
-- When that button is clicked, you should: ???
 
+--> will need a custom event in burger control
+--> write and attach a custom event handler to that event in MainWindow
+
+- When that button is clicked, you should: ???
+    - invoke your event (include information about the burger)
+    - in MainWindow's event handler:
+        - remove that item from the order
+        - add to order: a pick two with the specific burger
+        - make your pick two display visible
+        - pick two's DataContext should be the new pick two
 
 
 
@@ -91,6 +115,8 @@ of a pick two...but don't worry about this until last)
 PickTwo customization.
 
 --> what does PickTwo need to do with PropertyChanged?
+    have PropertyChanged event
+    invoke it when things are customized
 
 
 
@@ -98,6 +124,10 @@ PickTwo customization.
 
     Selected burger. Option to edit burger. Option to pick new burger.
     Selected ice cream. Option to edit ice cream. Option to pick new ice cream.
+
+
+
+
 
 ////
 
@@ -115,23 +145,29 @@ What to do in BurgerChoice set?
     public Burger BurgerChoice {
         get ...
         set {
-            
+            if (_burgerChoice != value) {
+                _burgerChoice.PropertyChanged -= HandleItemChanged;
+            _burgerChoice = value;
 
+            _burgerChoice.PropertyChanged += HandleItemChanged;
 
-
+            invoke PC for Price, BurgerChoice, Calories, PreparationInformation,
+                BurgerTypes
+            }
         }
     }
 
 
-What should custom event handler do?
+What should custom event handler do? (HandleItemChanged)
+    invoke PC Price, Calories, PreparationInformation
 
 
 
 ///////////////////////////
 
 In ComboBox for burger selection:
-    - ItemsSource = ?
-    - SelectedItem = ?
+    - ItemsSource = ?  BurgerTypes
+    - SelectedItem = ? BurgerChoice
 
 
 
@@ -142,7 +178,8 @@ Fix: only do the BurgerChoice set if the value is different from _burgerChoice
 
 
 What should PickTwo's "Edit burger" button do? How to accomplish?
-
+    I want MainWindow to display the burger control
+    another custom event, invoke in the click, listen to in main
 
 
 
@@ -157,7 +194,9 @@ MVVM - Model-View-ViewModel
     to MVC
 
 - Model holds the Data 
+
 - View is the XAML (ideally, with minimal code in the code-behind)
+
 - ViewModel handles the logic for the view -- it is the go-between
     - ViewModel has an instance of the Model
     - It exposes Model properties and/or includes additional properties with
@@ -168,7 +207,7 @@ MVVM - Model-View-ViewModel
 
 --> in full MVVM, each control would have a separate ViewModel. Instead of
     click, etc. events in the code-behind, we would use Commands
-    (similar idea [still occur with particular actions] but invokes methods 
+    (similar idea [still occur with particular actions] but invokes code 
     in the ViewModel that in turn would change our properties)
 
 
@@ -185,9 +224,13 @@ PaymentViewModel:
     - Contains properties for PaymentControl to bind to:
         --> What to "pass through" from order?
 
+            public decimal Subtotal => _order.Subtotal;
+
 
 
         --> What new properties?
+            Change 
+            PaymentAmount
 
 
 
@@ -195,9 +238,18 @@ PaymentViewModel:
 
         --> property for whether a control is enabled?
 
+            public bool ValidFunds 
+                (compare PaymentAmount to Total, return a bool)
+
+            IsEnabled = "{Binding ValidFunds}"
 
 
         --> property for text of an error message?
+
+            public string ErrorMessage
+                return "insufficient ..." if not enough funds 
+                else, return ""
+            
 
 
 
@@ -205,7 +257,10 @@ PaymentViewModel:
     --> if we are binding to (changing!) properties in PaymentViewModel,
         what does PaymentViewModel need to do so we get the changes?
 
+        implement INotifyPropertyChanged
 
+        in PaymentAmount's set, invoke PC for:
+            PaymentAmount, Change, ValidFunds, ErrorMessage
 
 
 
@@ -213,4 +268,4 @@ PaymentViewModel:
 
 ////////////////////
 
-Wednesday: discuss data validation
+Wednesday: discuss data validation, burger pick two button visibility
