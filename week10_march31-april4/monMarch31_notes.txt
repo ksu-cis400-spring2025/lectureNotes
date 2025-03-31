@@ -19,7 +19,7 @@ Summary of requirements:
 Ingredient customization.
 
 - Still use ONE Burger control for all burgers
-- You should have a Dictionary<BurgerTopping, BurgerIngredient>
+- You should have a Dictionary<BurgerTopping, BurgerIngredient> AllToppings
     --> this should contain ONLY those ingredients allowed for a particular burger 
 
 
@@ -41,7 +41,7 @@ Two ways to populate:
     2) In Burger control XAML, make a ListView whose ItemsSource binds to your
         list of BurgerIngredients. 
 
-            ItemsSource="{Binding AllIngredients.Values}"
+            ItemsSource="{Binding AllToppings.Values}"
         
         
         You can make a custom data template (like we did in
@@ -77,16 +77,9 @@ Handling PropertyChanged.
 Pick Two
 
 - Add "Add to Pick Two" button to Burger control
-- When that button is clicked, you should:
-    - remove that item from the Order
-    - add a PickTwo with the burger as the burger choice to the Order
-    - hide the Burger customization screen
-    - display the pick two customization screen
+- When that button is clicked, you should: ???
 
 
-You want to send a message from the PickTwo control to MainWindow
-
-How to do this? 
 
 
 
@@ -122,40 +115,35 @@ What to do in BurgerChoice set?
     public Burger BurgerChoice {
         get ...
         set {
-            detach my custom event handler from _burgerChoice
+            
 
-            _burgerChoice = value;
-            _burgerChoice.PropertyChanged += MyCustomEventHandler;
 
-            invoke PropertyChanged for Price, Calories, PreparationInformation,
-                BurgerChoice, BurgerTypes (easy way to reset to new instance
-                    of old selected burger)
+
         }
     }
 
 
-MyCustomEventHandler should invoke PropertyChanged for Price, Calories, PreparationInformation
+What should custom event handler do?
 
+
+
+///////////////////////////
 
 In ComboBox for burger selection:
-    - ItemsSource = BurgerTypes
-    - SelectedItem = BurgerChoice
+    - ItemsSource = ?
+    - SelectedItem = ?
 
 
 
 
-(One hiccup: ComboBox binding will cause SelectedItem [BurgerChoice] to be set
-when the items [BurgerTypes] change, which invokes PropertyChanged for BurgerTypes,
-which causes the combo box items to change again, etc....stack overflow
 
-Fix: only do the BurgerChoice set if the value is different from _burgerChoice)
+Fix: only do the BurgerChoice set if the value is different from _burgerChoice
 
 
 
-What should PickTwo's "Edit burger" button do?
-    bring up customization screen for that burger
+What should PickTwo's "Edit burger" button do? How to accomplish?
 
-    custom event between PickTwo customization control and MainWindow
+
 
 
 (now do same for ice cream)
@@ -197,31 +185,30 @@ PaymentViewModel:
     - Contains properties for PaymentControl to bind to:
         --> What to "pass through" from order?
 
-            public decimal Subtotal => _order.Subtotal;
 
 
         --> What new properties?
 
-            Change, PaymentAmount
+
 
 
 
         --> property for whether a control is enabled?
-            IsEnabled="{Binding EnoughFunds}"
 
 
-        public bool EnoughFunds ...
 
         --> property for text of an error message?
-            return "" if enough funds, otherwise return the error message
+
+
 
 
     --> if we are binding to (changing!) properties in PaymentViewModel,
         what does PaymentViewModel need to do so we get the changes?
 
-view model implements INotifyPropertyChanged
-    in set for the payment amount, invoke PropertyChanged for:
-        change, the message, bool EnoughFunds property, payment amount itself
+
+
+
+
 
 
 ////////////////////
