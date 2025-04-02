@@ -6,6 +6,12 @@ Milestone 8 due Friday
 
 --> want to hide if it is already part of a pick two
 
+add a Property to Burger class: PartOfPickTwo -> false initially
+    change to true in the click for adding to a pick two
+
+    any time you make the burger control visible, then look at PartOfPickTwo
+        if false: make the Add to Pick Two button visible
+        if true: make it hidden
 
 /////////////////////////
 
@@ -52,6 +58,8 @@ Printing the receipt
 File.AppendAllText("receipts.txt", someGiantTextString);
 
 How to build the text string?
+
+use StringBuilder
 
 
 
