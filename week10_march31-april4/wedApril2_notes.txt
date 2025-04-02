@@ -6,12 +6,14 @@ Milestone 8 due Friday
 
 --> want to hide if it is already part of a pick two
 
-add a Property to Burger class: PartOfPickTwo -> false initially
-    change to true in the click for adding to a pick two
+Add property to Burger class: PartOfPickTwo -> initially false
 
-    any time you make the burger control visible, then look at PartOfPickTwo
-        if false: make the Add to Pick Two button visible
-        if true: make it hidden
+
+When Add to Pick Two button clicked, make PartOfPickTwo false
+
+anytime you make burger customization control visible, check
+    PartOfPickTwo property, set Visibility of button based on that
+
 
 /////////////////////////
 

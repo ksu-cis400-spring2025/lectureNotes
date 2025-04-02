@@ -16,13 +16,12 @@ namespace ValidationExample
             get => _shirts;
             set
             {
-                
                 if (value > 10)
                 {
                     _shirts = 0;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Shirts)));
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Cost)));
-                    throw new InvalidOperationException("shirts must be 0-10");
+                    throw new InvalidOperationException("invalid shirts (should be 0-10)");
                 }
 
                 _shirts = value;
@@ -41,7 +40,8 @@ namespace ValidationExample
             get
             {
                 //$10 each for up to 5 shirts, $8 each after that
-                if (Shirts <= 5) return 10 * Shirts;
+
+                if (Shirts <= 5) return Shirts * 10;
                 else return 5 * 10 + (Shirts - 5) * 8;
             }
         }
