@@ -1,0 +1,148 @@
+UML in WPF tutorial: due Monday
+Milestone 9: due Friday
+
+
+Exam 2: Wednesday, April 16
+
+--> will post review materials for next week's module
+--> Mon April 14 will be an exam review day
+--> no milestone/tutorials due next week
+--> all tutorials/milestones since Exam 1 must be turned in by
+    Fri April 16 for any partial credit
+
+--> we will start on Razor pages after the exam
+
+////////////////////////////////////
+
+Milestone 9.
+- Update UML to match current state of your application
+
+- Unit test updates from Milestones 7-8
+
+- Integration testing
+
+
+//////////////////////////////////
+
+UML considerations:
+- denote the namespaces (how?)
+
+
+- fully qualify class (namespace.ClassName) if referring to a class
+    from a different namespace
+
+
+- indicate that MainWindow extends Window 
+
+
+- indicate that EVERY user control extends UserControl 
+
+
+- include all named controls, public properties/methods/events, and
+    event handlers (even if private) in UML
+
+
+- indicate the DataContext of EVERY control (unless it is inheriting
+    from a parent control)
+
+        MainWindow: ?
+        Payment control: ? (library issues)
+        all customization controls: 
+
+
+- indicate whenever a control is placed on another control
+    MainWindow has?
+    all customization controls have?
+
+
+///
+
+--> recommendation: have sections on your UML:
+    - one for inheriting Window/UserControl
+    - one to show the DataContexts
+    - one to show the composition of controls on other controls
+
+
+
+--> custom event args?
+    extends RoutedEventArgs
+    property: IMenuItem  (show that relationship)
+    use directed association 
+        point from a class to the class being used
+
+        (menu selection control) --> custom event args
+        etc for any control that uses custom event args 
+
+
+--> PaymentViewModel? 
+    DataContext for the payment control
+
+
+--> UML changes in Data project?
+    IMenuItem?
+
+    PickTwo, Entree, Side, Drink?
+
+    PickTwo?
+    Burger?
+
+
+    PaymentViewModel implements... ?
+
+    BurgerIngredient implements..?
+
+
+
+//////////////////////////////////
+
+Unit tests.
+
+Each menu item unit test class:
+- test the menu item implements INotifyPropertyChanged
+- for the corresponding menu item:
+    --> think of which properties can change (either with a set 
+        or as a result of other properties changing)
+    --> test ALL combinations of (changingProperty, affectedProperty)
+        to ensure PropertyChanged is invoked
+
+        winter swirl: mix in choice?
+
+
+
+--> for EACH burger type: try changing its ingredients to be
+    included/not included. Assert that such changes invoke
+    PropertyChanged for that entrees
+
+        Which properties change?
+
+
+
+
+--> for PickTwo: try changing burger/ice cream choice, assert that
+    PropertyChanged is correctly invoked for?
+
+
+
+    (it is OK if you do this with specific entrees/sides/drinks)
+    (you don't need to check anything with further customizations)
+
+
+
+
+--> also complete the integration tests described for PaymentViewModel.
+
+
+////////////////////////
+
+Example: Coffee
+
+- implements INotifyPropertyChanged
+- what properties can change? 
+
+
+    
+
+    --> What properties are affected as a result of that change?
+
+    --> how to write one of the tests (check size change properties)
+
