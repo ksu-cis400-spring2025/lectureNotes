@@ -28,7 +28,7 @@ UML considerations:
 - denote the namespaces (how?)
 
 
-- fully qualify class (namespace.ClassName) if referring to a class
+- fully qualify class (what does that mean?) if referring to a class
     from a different namespace
 
 
@@ -65,23 +65,14 @@ UML considerations:
 
 
 --> custom event args?
-    extends RoutedEventArgs
-    property: IMenuItem  (show that relationship)
-    use directed association 
-        point from a class to the class being used
-
-        (menu selection control) --> custom event args
-        etc for any control that uses custom event args 
-
 
 --> PaymentViewModel? 
-    DataContext for the payment control
 
 
 --> UML changes in Data project?
     IMenuItem?
 
-    PickTwo, Entree, Side, Drink?
+    PickTwo, Burger, IceCream, Drink?
 
     PickTwo?
     Burger?
@@ -109,13 +100,18 @@ Each menu item unit test class:
 
 
 
---> for EACH burger type: try changing its ingredients to be
+
+--> also, for EACH burger type: try changing its ingredients to be
     included/not included. Assert that such changes invoke
-    PropertyChanged for that entrees
+    PropertyChanged for that burger
 
         Which properties change?
 
 
+
+    (you should also do this for drink/ice cream if its customizations involve
+    a similar dictionary)
+    
 
 
 --> for PickTwo: try changing burger/ice cream choice, assert that
