@@ -26,13 +26,15 @@ Milestone 9.
 
 UML considerations:
 - denote the namespaces (how?)
-    1) make two tabs - one DairyBarn.Data, one DairyBarn.PointOfSale
-    2) use UML "package" control 
+    1) tabs in Visio, DairyBarn.Data, DairyBarn.PointOfSale
+    2) use a package designation in UML, one for DairyBarn.Data,
+        one for DairyBarn.PointOfSale
 
 
 - fully qualify class (what does that mean?) if referring to a class
     from a different namespace
 
+    Namespace.Classname
     DairyBarn.Data.Order
 
 
@@ -46,27 +48,37 @@ UML considerations:
     event handlers (even if private) in UML
 
 
-- indicate the DataContext of EVERY control (unless it is inheriting
-    from a parent control). This is an aggregation relationship
-        (diamond touches the control/window)
+
+- indicate the DataContext of EVERY window/control (unless it is inheriting
+    from a parent control)
 
         MainWindow: ? Order
-        Payment control: ? PaymentViewModel (library issues -
-            need to move PaymentViewModel to Data project to work with tests)
-        
-        all customization controls: the corresponding menu item
+        Payment control: ? PaymentViewModel (library issues)
+            will need to move PaymentViewModel to the Data project
+            if it isn't there
+        all customization controls: the corresponding menu
 
-    if the relationship is 1-1, don't need to put multiplicities on UML
-    SHOULD put multiplicities in any other relationship
+    what type of relationship is this? aggregation (HAS-A)
+        diamond touches the class doing the collection
+        diamond would touch the control/window
+
+    multiplicities? 1 to 1 in this case.
+    don't need to include multiplicities if 1-1.
+    DO indicate multiplicities when not 1 to 1
 
 
 
-- indicate whenever a control is placed on another control
-    MainWindow has? order summary, menu control, customization controls,
-        payment control
-    all customization controls have? sometimes, a count box,
-        ALL have that helper control (with name/descr./calories)
+- indicate whenever a window/control is placed on another control
+    MainWindow has? all of them (menu selection, order summary,
+        payment control, all customization controls)
 
+        composition relationship
+        MainWindow HAS a burger customization control
+            diamond touches MainWindow
+
+    all customization controls have? the helper control
+        burger control, ice cream control: have a count box control
+    
 
 ///
 
@@ -78,28 +90,16 @@ UML considerations:
 
 
 --> custom event args?
-    extends RoutedEventArgs
-    IMenuItem property (custom event args HAS an IMenuItem)
-        aggregation, diamond touches CustomEventArgs
+    extends RoutedEventArgs - should be indicated
+    has IMenuItem as a property or field    (use aggregation, diamond
+                                        touches the custom event args)
 
-    look where custom event args is used in different controls.
-    want to indicate when it is a type of event or a parameter to
-        an event handler
+   see in MainWindow/different user control's code behinds
+        type of an event
+        or, event handler, parameter is a custom event args
 
-    directed association to point to the class we need
-    arrow from user control/window to the custom event args
-
-
-    (might want to put this in a new area on the UML)
-
-
-
---> PaymentViewModel? 
-    DataContext for the payment control
-    probably has a field/property that is an Order
-    PaymentViewModel HAS an Order (aggregation)
-        diamond touches the PaymentViewModel
-    implements INotifyPropertyChanged
+    use the directed association relationship
+    should point from the window/control to the custom event args
 
 
 
@@ -107,20 +107,19 @@ UML considerations:
     IMenuItem? implements INotifyPropertyChanged
 
     PickTwo, Burger, IceCream, Drink?
-        PropertyChanged event itself
+        include PropertyChanged event
 
     PickTwo?
-        list of burger types, ice cream types
+        list of burger types, list of ice cream types
 
 
     Burger?
-        bool for part of pick two
+        bool: if it was part of a pick two
 
 
     BurgerIngredient implements..? INotifyPropertyChanged
-        should be on UML
-        PropertyChanged event
 
+    PaymentViewModel implements? INotifyPropertyChanged
 
 
 //////////////////////////////////
@@ -139,19 +138,15 @@ Each menu item unit test class:
 
         winter swirl: mix in choice?
 
-        Calories, PreparationInformation, MixInChoice
+        affects: MixInChoice, Calories, PreparationInformation
 
-        want to test that when I try changing mix in, 
-            PropertyChanged for calories
-            PropertyChanged for price
-            PropertyChanged for PreparationInformation
 
 
 --> also, for EACH burger type: try changing its ingredients to be
     included/not included. Assert that such changes invoke
     PropertyChanged for that burger
 
-        Which properties change? Calories, Price, PreparationInformation
+        Which properties change? Calories, PreparationInformation, Price
 
 
 
@@ -162,8 +157,7 @@ Each menu item unit test class:
 
 --> for PickTwo: try changing burger/ice cream choice, assert that
     PropertyChanged is correctly invoked for?
-        Price, Calories, PreparationInformation
-
+        PreparationInformation, Calories, Price, (Burger/ice cream choice)
 
 
     (it is OK if you do this with specific entrees/sides/drinks)
@@ -175,28 +169,27 @@ Each menu item unit test class:
 --> also complete the integration tests described for PaymentViewModel.
 
 
+
+
+
 ////////////////////////
 
 Example: Coffee
 
 - implements INotifyPropertyChanged
 - what properties can change? 
-    size, cream, sugar, iced, decaf
 
-    size impacts: calories, price, preparation information, size
-    cream impacts: cream, calories, preparation information 
-    sugar impacts: sugar, calories, preparation information 
-    iced impacts: preparation information, iced
-    decaf impacts: calories, preparation information, decaf
-
-    
+    size impacts: calories, price, PreparationInformation, size
+    iced impacts: PreparationInformation, iced
+    decaf: PreparationInformation, decaf, calories
+    cream: calories, PreparationInformation, cream
+    sugar: calories, PreparationInformation, sugar
 
     --> What properties are affected as a result of that change?
 
     --> how to write one of the tests (check size change properties)
 
-changing cream test:
-
+Testing cream for coffee.
 
 [Theory]
 [InlineData(true, "Calories")]
@@ -205,9 +198,9 @@ changing cream test:
 [InlineData(false, "Calories")]
 [InlineData(false, "PreparationInformation")]
 [InlineData(false, "Cream")]
-public void ChangingCreamShouldNotifyOfPropertyChanged(bool cream, string property) {
+public void ChangingCreamShouldNotifyOfPropertyChanged(bool cream, string property)
+{
     Coffee c = new();
-
     Assert.PropertyChanged(c, property, () => {
         c.Cream = cream;
     });
