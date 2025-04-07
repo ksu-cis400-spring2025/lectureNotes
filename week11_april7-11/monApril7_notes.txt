@@ -8,7 +8,7 @@ Exam 2: Wednesday, April 16
 --> Mon April 14 will be an exam review day
 --> no milestone/tutorials due next week
 --> all tutorials/milestones since Exam 1 must be turned in by
-    Fri April 16 for any partial credit
+    Fri April 18 for any partial credit
 
 --> we will start on Razor pages after the exam
 
@@ -111,7 +111,7 @@ Each menu item unit test class:
 
     (you should also do this for drink/ice cream if its customizations involve
     a similar dictionary)
-    
+
 
 
 --> for PickTwo: try changing burger/ice cream choice, assert that
