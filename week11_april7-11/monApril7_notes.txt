@@ -26,10 +26,14 @@ Milestone 9.
 
 UML considerations:
 - denote the namespaces (how?)
+    1) make two tabs - one DairyBarn.Data, one DairyBarn.PointOfSale
+    2) use UML "package" control 
 
 
 - fully qualify class (what does that mean?) if referring to a class
     from a different namespace
+
+    DairyBarn.Data.Order
 
 
 - indicate that MainWindow extends Window 
@@ -43,16 +47,25 @@ UML considerations:
 
 
 - indicate the DataContext of EVERY control (unless it is inheriting
-    from a parent control)
+    from a parent control). This is an aggregation relationship
+        (diamond touches the control/window)
 
-        MainWindow: ?
-        Payment control: ? (library issues)
-        all customization controls: 
+        MainWindow: ? Order
+        Payment control: ? PaymentViewModel (library issues -
+            need to move PaymentViewModel to Data project to work with tests)
+        
+        all customization controls: the corresponding menu item
+
+    if the relationship is 1-1, don't need to put multiplicities on UML
+    SHOULD put multiplicities in any other relationship
+
 
 
 - indicate whenever a control is placed on another control
-    MainWindow has?
-    all customization controls have?
+    MainWindow has? order summary, menu control, customization controls,
+        payment control
+    all customization controls have? sometimes, a count box,
+        ALL have that helper control (with name/descr./calories)
 
 
 ///
@@ -65,22 +78,48 @@ UML considerations:
 
 
 --> custom event args?
+    extends RoutedEventArgs
+    IMenuItem property (custom event args HAS an IMenuItem)
+        aggregation, diamond touches CustomEventArgs
+
+    look where custom event args is used in different controls.
+    want to indicate when it is a type of event or a parameter to
+        an event handler
+
+    directed association to point to the class we need
+    arrow from user control/window to the custom event args
+
+
+    (might want to put this in a new area on the UML)
+
+
 
 --> PaymentViewModel? 
+    DataContext for the payment control
+    probably has a field/property that is an Order
+    PaymentViewModel HAS an Order (aggregation)
+        diamond touches the PaymentViewModel
+    implements INotifyPropertyChanged
+
 
 
 --> UML changes in Data project?
-    IMenuItem?
+    IMenuItem? implements INotifyPropertyChanged
 
     PickTwo, Burger, IceCream, Drink?
+        PropertyChanged event itself
 
     PickTwo?
+        list of burger types, ice cream types
+
+
     Burger?
+        bool for part of pick two
 
 
-    PaymentViewModel implements... ?
-
-    BurgerIngredient implements..?
+    BurgerIngredient implements..? INotifyPropertyChanged
+        should be on UML
+        PropertyChanged event
 
 
 
@@ -90,6 +129,8 @@ Unit tests.
 
 Each menu item unit test class:
 - test the menu item implements INotifyPropertyChanged
+        Assert.IsAssignableFrom
+
 - for the corresponding menu item:
     --> think of which properties can change (either with a set 
         or as a result of other properties changing)
@@ -98,14 +139,19 @@ Each menu item unit test class:
 
         winter swirl: mix in choice?
 
+        Calories, PreparationInformation, MixInChoice
 
+        want to test that when I try changing mix in, 
+            PropertyChanged for calories
+            PropertyChanged for price
+            PropertyChanged for PreparationInformation
 
 
 --> also, for EACH burger type: try changing its ingredients to be
     included/not included. Assert that such changes invoke
     PropertyChanged for that burger
 
-        Which properties change?
+        Which properties change? Calories, Price, PreparationInformation
 
 
 
@@ -116,6 +162,7 @@ Each menu item unit test class:
 
 --> for PickTwo: try changing burger/ice cream choice, assert that
     PropertyChanged is correctly invoked for?
+        Price, Calories, PreparationInformation
 
 
 
@@ -134,7 +181,13 @@ Example: Coffee
 
 - implements INotifyPropertyChanged
 - what properties can change? 
+    size, cream, sugar, iced, decaf
 
+    size impacts: calories, price, preparation information, size
+    cream impacts: cream, calories, preparation information 
+    sugar impacts: sugar, calories, preparation information 
+    iced impacts: preparation information, iced
+    decaf impacts: calories, preparation information, decaf
 
     
 
@@ -142,3 +195,20 @@ Example: Coffee
 
     --> how to write one of the tests (check size change properties)
 
+changing cream test:
+
+
+[Theory]
+[InlineData(true, "Calories")]
+[InlineData(true, "PreparationInformation")]
+[InlineData(true, "Cream")]
+[InlineData(false, "Calories")]
+[InlineData(false, "PreparationInformation")]
+[InlineData(false, "Cream")]
+public void ChangingCreamShouldNotifyOfPropertyChanged(bool cream, string property) {
+    Coffee c = new();
+
+    Assert.PropertyChanged(c, property, () => {
+        c.Cream = cream;
+    });
+}
