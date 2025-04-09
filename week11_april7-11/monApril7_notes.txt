@@ -56,7 +56,7 @@ UML considerations:
         Payment control: ? PaymentViewModel (library issues)
             will need to move PaymentViewModel to the Data project
             if it isn't there
-        all customization controls: the corresponding menu
+        all customization controls: the corresponding menu item
 
     what type of relationship is this? aggregation (HAS-A)
         diamond touches the class doing the collection
