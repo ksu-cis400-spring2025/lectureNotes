@@ -27,12 +27,18 @@ Exam 2 topics:
 - DataContext
 - Data binding
 
+
 ****INotifyPropertyChanged and INotifyCollectionChanged, including how and when to 
     invoke PropertyChanged and how to listen to the PropertyChanged of another object
+
+    --> example: how does Order listen to PropertyChanged of its items?
+
+
 
 ***Events, including custom events, custom event arguments, invoking events, 
     attaching event handlers to events, and using events to send messages between 
     objects
+
 
 - MVVM (the ideas)
 - Testing the PropertyChanged event
@@ -44,6 +50,3 @@ Mix of multiple choice and "open-ended"
 
 
 --> work previous exam
-
-Also be familiar with attaching an event handler to the PropertyChanged event
-for a contained item (how does this work in Order?)
