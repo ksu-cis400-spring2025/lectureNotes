@@ -33,23 +33,22 @@ Exam 2 topics:
 
     --> example: how does Order listen to PropertyChanged of its items?
 
-    we're going to listen to those item's PropertyChanged
-    when we add a new item (like in an Add method):
-
+we did this in Order's Add:
     item.PropertyChanged += OurEventHandler;
+
     also, invoke PropertyChanged for Subtotal, Tax, Total
 
-    then elsewhere, do:
+Then we would write:
 
     private void OurEventHandler(object sender, PropertyChangedEventArgs e) {
-        //look at e.PropertyName, which is the property that changed for the item
-        //in here, 
-            invoke PropertyChanged for Subtotal, Tax, Total
+        //look at e.PropertyName, if it was "Price":
+            //invoke PropertyChanged for: Subtotal, Tax, Total
     }
 
 
 
-***Events, including custom events, custom event arguments, invoking events, 
+
+***Events, including custom events, custom event arguments (extends RoutedEventArgs), invoking events, 
     attaching event handlers to events, and using events to send messages between 
     objects
 
