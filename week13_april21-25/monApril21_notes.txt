@@ -65,12 +65,12 @@ When you add the ASP.NET web app project, be sure to right-click the
 
 
 
-Project reference?
+Access Data project?
 
-Access data project:
+1) Add project reference to Data
+2) Add a using statement (in both html and page model)
 
-1) Add project reference (website needs to reference Data)
-2) Add using statement (need a using in BOTH the html side AND the PageModel side)
+
 
 /////////////////
 
@@ -92,26 +92,36 @@ Access data project:
 
 - Example: Veggie Burger. What combinations?
 
-    2 cheese 
-    1 or 2 patties
+    cheese - 2 (pepperjack, none)
+    patties - 2 (1 or 2 patties)
 
-
-    total veggie burgers: 4
+    4 total 
         pepperjack, 1 patty
         pepperjack, 2 patties
         no cheese, 1 patty
         no cheese, 2 patties
 
 
+- Example: Classic cheeseburger
+    cheese: 2 (American, none)
+    patties: 3 (1, 2, or 3)
+    veggie: 2 
+
+
+
+2*3*2 = 12 possibilities
+
+
 
 - Example: Brownie Sundae. What combinations?
 
-    sauce: hot fudge or none 
-    cherry
-    whipped Cream
-    peanuts 
+    sauce: 2 (hot fudge or none)
+    whipped cream: 2 (on or off)
+    cherry: 2 (on or off)
+    peanuts: 2 (on or off)
 
-    total combinations: 2 * 2 * 2 * 2 = 16 possibilities
+total: 2 * 2 * 2 * 2 = 16 possibilities
+
 
 
 
@@ -144,16 +154,16 @@ Menu class: Burgers, IceCream, Drinks
 --> recommend populating private fields in a static constructor
 --> then return the private field in the properties
 
-
 private static List<IMenuItem> _burgers;
+
 
 public static List<IMenuItem> Burgers => _burgers;
 
+static Menu() {
+    _burgers = new();
 
-static Menu {}
-   _burgers = new();
+    //add all combinations
 
-    //add all items
 }
 
 
