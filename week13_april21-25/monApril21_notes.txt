@@ -59,6 +59,13 @@ Milestone 10: due Friday
     --> also show available toppings under Burgers
 
 
+When you add the ASP.NET web app project, be sure to right-click the 
+    dairy barn solution and do Add->New project
+
+Project reference?
+
+
+
 
 - Idea: create instance of all (as much as is reasonable...) so they're there
     and ready to search for next week
@@ -109,9 +116,6 @@ Menu class: Burgers, IceCream, Drinks
 --> recommend populating private fields in a static constructor
 --> then return the private field in the properties
 
-
-When you add the ASP.NET web app project, be sure to right-click the 
-    dairy barn solution and do Add->New project
 
 ////////////////////////
 
