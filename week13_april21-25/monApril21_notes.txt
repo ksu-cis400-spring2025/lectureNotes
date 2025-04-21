@@ -62,9 +62,17 @@ Milestone 10: due Friday
 When you add the ASP.NET web app project, be sure to right-click the 
     dairy barn solution and do Add->New project
 
+
+
+
 Project reference?
 
+Access data project:
 
+1) Add project reference (website needs to reference Data)
+2) Add using statement (need a using in BOTH the html side AND the PageModel side)
+
+/////////////////
 
 
 - Idea: create instance of all (as much as is reasonable...) so they're there
@@ -72,6 +80,8 @@ Project reference?
 
     Burgers: create instance of each type of burger in each possible 
         cheese/patties/veggie combination. Don't need topping combinations.
+
+
 
 
     Ice Cream: create all possible combinations
@@ -82,8 +92,26 @@ Project reference?
 
 - Example: Veggie Burger. What combinations?
 
+    2 cheese 
+    1 or 2 patties
+
+
+    total veggie burgers: 4
+        pepperjack, 1 patty
+        pepperjack, 2 patties
+        no cheese, 1 patty
+        no cheese, 2 patties
+
+
 
 - Example: Brownie Sundae. What combinations?
+
+    sauce: hot fudge or none 
+    cherry
+    whipped Cream
+    peanuts 
+
+    total combinations: 2 * 2 * 2 * 2 = 16 possibilities
 
 
 
@@ -115,6 +143,20 @@ Menu class: Burgers, IceCream, Drinks
 
 --> recommend populating private fields in a static constructor
 --> then return the private field in the properties
+
+
+private static List<IMenuItem> _burgers;
+
+public static List<IMenuItem> Burgers => _burgers;
+
+
+static Menu {}
+   _burgers = new();
+
+    //add all items
+}
+
+
 
 
 ////////////////////////
