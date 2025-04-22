@@ -1,0 +1,110 @@
+Milestone 10: due Friday
+
+
+Recommended order of approach:
+- Add About page and edit Privacy page
+- Write the static Menu class (DairyBarn.Data)
+- Write the index page to get the menu information to *appear*
+- Testing
+- UML
+- Styling
+
+//////////////////////////////////
+
+
+Testing: static Menu class
+
+For each type of menu item (Burgers, IceCream, Drinks):
+    1) Test that the count matches your expectations
+        
+    --> include documentation explaining how you got the number you did
+
+
+    2) For Burgers/ice cream:
+        3 checks for specific "edge case" menu items that SHOULD be in the menu
+        3 checks for specific "edge case" menu items that should NOT be in the menu
+
+    3) For drinks:
+        3 chese for specific customized menu items that SHOULD be in the menu
+
+////////////////////////////////
+
+Assert.Contains(collection, item => (some bool expression about item));
+
+
+Example: make sure "Drinks" contains a tall iced decaf coffee with cream and no sugar
+
+
+
+
+
+Assert.DoesNotContain(collection, item => (some bool expression about item));
+
+Example: make sure "Burgers" does NOT contain a veggie burger with non-veggie patties
+
+
+
+Would this work?
+
+Assert.Contains(Menu.Drinks, item => item == new Coffee(){...});
+
+
+///////////////////////////////
+
+Not required to test BurgerToppings collection
+
+
+///////////////////////////////
+
+Loop through enumerations (example, CoffeeSize): 
+
+
+
+
+
+
+///////////////////////////////
+
+UML:
+
+- add static Menu class (namespace? )
+    how to show static? 
+    any "has-a" relationships? 
+
+
+
+
+
+- add each page (Index, Privacy, About, Error) and mark the new namespace
+    - look in each PageModel (code-behind) to see any properties/members
+    - look for inheritance information
+
+
+
+
+--> relationship between Menu and Index page?
+
+
+
+
+--> don't need Program.cs, _Layout.cshtml, ViewImports.cshtml
+
+
+
+/////////////////////////
+
+Styling the menu items.
+
+Suggestion: have div around burgers, ice cream, drinks sections
+
+have a div around each menu item
+
+
+css for burgers/ice cream/drinks
+    display: flex;
+    flex-wrap: wrap;
+
+
+css for menu item (gives length to item)
+    flex-basis: 200px;
+    border: (set to something)
