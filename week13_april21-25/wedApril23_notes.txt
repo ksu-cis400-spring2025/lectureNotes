@@ -19,6 +19,13 @@ For each type of menu item (Burgers, IceCream, Drinks):
         
     --> include documentation explaining how you got the number you did
 
+    //classic cheeseburger: 2 cheeses, 3 patties, 2 veggie: 12 total
+    //etc.
+    //total: 12 + ....
+
+
+    Assert.Equal(some number, burger count)
+
 
     2) For Burgers/ice cream:
         3 checks for specific "edge case" menu items that SHOULD be in the menu
@@ -26,6 +33,7 @@ For each type of menu item (Burgers, IceCream, Drinks):
 
     3) For drinks:
         3 chese for specific customized menu items that SHOULD be in the menu
+
 
 ////////////////////////////////
 
@@ -35,12 +43,18 @@ Assert.Contains(collection, item => (some bool expression about item));
 Example: make sure "Drinks" contains a tall iced decaf coffee with cream and no sugar
 
 
+Assert.Contains(Menu.Drinks, drink => drink is Coffee c &&
+                                c.SizeChoice == CoffeeSize.Tall &&
+                                    c.Cream && !c.Sugar && c.Decaf && c.Iced);
+
 
 
 
 Assert.DoesNotContain(collection, item => (some bool expression about item));
 
 Example: make sure "Burgers" does NOT contain a veggie burger with non-veggie patties
+
+Assert.DoesNotContain(Menu.Burgers, item => item is VeggieBurger v && !v.Veggie);
 
 
 
@@ -59,7 +73,9 @@ Not required to test BurgerToppings collection
 Loop through enumerations (example, CoffeeSize): 
 
 
+foreach(CoffeeSize c in Enum.GetValues<CoffeeSize>()) {
 
+}
 
 
 
@@ -67,10 +83,11 @@ Loop through enumerations (example, CoffeeSize):
 
 UML:
 
-- add static Menu class (namespace? )
-    how to show static? 
+- add static Menu class (namespace? DairyBarn.Data)
+    how to show static? underline (class name and all the properties)
     any "has-a" relationships? 
-
+        "has-a" IMenuItems
+        "has-a" BurgerIngredient
 
 
 
@@ -83,7 +100,10 @@ UML:
 
 
 --> relationship between Menu and Index page?
+    directed association
 
+
+    point from Index to the Menu
 
 
 
