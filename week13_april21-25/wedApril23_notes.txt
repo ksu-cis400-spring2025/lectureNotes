@@ -75,7 +75,7 @@ UML:
 
 
 
-- add each page (Index, Privacy, About, Error) and mark the new namespace
+- add each page (Index, Privacy, About) and mark the new namespace
     - look in each PageModel (code-behind) to see any properties/members
     - look for inheritance information
 
@@ -87,7 +87,7 @@ UML:
 
 
 
---> don't need Program.cs, _Layout.cshtml, ViewImports.cshtml
+--> don't need Program.cs, Error.cshthml.cs, _Layout.cshtml, ViewImports.cshtml
 
 
 
