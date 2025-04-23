@@ -19,12 +19,11 @@ For each type of menu item (Burgers, IceCream, Drinks):
         
     --> include documentation explaining how you got the number you did
 
-    //classic cheeseburger: 2 cheeses, 3 patties, 2 veggie: 12 total
-    //etc.
-    //total: 12 + ....
+    //classic: 2 cheese, 3 patties, 2 veggie, total: 12 
+    //other burgers
+    //total: 12 + .... = (some number)
 
-
-    Assert.Equal(some number, burger count)
+    Assert.Equal(some number, the collection's count)
 
 
     2) For Burgers/ice cream:
@@ -42,10 +41,9 @@ Assert.Contains(collection, item => (some bool expression about item));
 
 Example: make sure "Drinks" contains a tall iced decaf coffee with cream and no sugar
 
+Assert.Contains(Menu.Drinks, item => item is Coffee c && c.Iced && c.Decaf
+                                    && c.Cream && !c.Sugar && c.SizeChoice == CoffeeSize.Tall )
 
-Assert.Contains(Menu.Drinks, drink => drink is Coffee c &&
-                                c.SizeChoice == CoffeeSize.Tall &&
-                                    c.Cream && !c.Sugar && c.Decaf && c.Iced);
 
 
 
@@ -58,7 +56,7 @@ Assert.DoesNotContain(Menu.Burgers, item => item is VeggieBurger v && !v.Veggie)
 
 
 
-Would this work?
+Would this work? not unless you override ==
 
 Assert.Contains(Menu.Drinks, item => item == new Coffee(){...});
 
@@ -72,10 +70,10 @@ Not required to test BurgerToppings collection
 
 Loop through enumerations (example, CoffeeSize): 
 
-
-foreach(CoffeeSize c in Enum.GetValues<CoffeeSize>()) {
+foreach (CoffeeSize c in Enum.GetValues<CoffeeSize>()) {
 
 }
+
 
 
 
@@ -86,8 +84,8 @@ UML:
 - add static Menu class (namespace? DairyBarn.Data)
     how to show static? underline (class name and all the properties)
     any "has-a" relationships? 
-        "has-a" IMenuItems
-        "has-a" BurgerIngredient
+        has a bunch of IMenuItem - aggregation (diamond on Menu)
+        has a bunch BurgerIngredient
 
 
 
@@ -101,9 +99,7 @@ UML:
 
 --> relationship between Menu and Index page?
     directed association
-
-
-    point from Index to the Menu
+    point from Index to Menu
 
 
 
