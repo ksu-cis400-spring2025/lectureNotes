@@ -1,0 +1,144 @@
+Today: Web Data Tutorial (has some extra on your own after video)
+Tuesday: LINQ Tutorial (again, some extra after the video)
+
+Milestone 11: due Friday
+
+Next week: POST requests
+    one more milestone (#12)
+
+Optional final.
+    1:30 section: Tuesday, May 13 11:50 am - 1:40 pm
+    2:30 section: Thursday, May 15 4:10-6:00 pm 
+
+
+Using what if for exams.
+
+///////////////////////////
+
+"Data binding" in Razor pages
+
+Use a form to transfer data from browser to PageModel
+
+Forms have different input elements, notably:
+    text
+    number
+    radio button 
+    check box 
+    submit (a button that submits the form)
+
+
+<form>
+    <input type="text" value="I have text"/>
+    ...
+    <input type="submit" value="Submit Form"/>
+</form>
+
+
+Clicking the submit button calls the OnGet method in the PageModel
+
+
+
+
+(form elements also have name, placeholder, min / max (for number type) attributes
+
+
+/////////////////////////////
+
+Data binding in Razor pages
+
+- bind an HTML form element to a property in the PageModel
+
+<input type="text" name = "MyString" value="@Model.MyString"/>
+
+
+
+In PageModel:
+
+[BindProperty(SupportsGet = true)]
+public string MyString { get; set; }
+
+
+//////////////////////////////
+
+Example: see initial form Example
+
+--> how to bind to a string property?
+
+
+--> what should we do in OnGet? When is OnGet first called?
+
+
+
+--> what happens if we try to add each element to a list in PageModel?
+    what happens to the list?
+
+
+//////////////////////////////
+
+Milestone 11:
+
+--> add form with filters by calories (low/high), price (low/high), keywords
+
+
+
+For keywords: split into separate strings
+
+You have a match of all the strings are contained in either:
+    - name
+    - description
+    - preparation information
+
+
+
+Example: "tall iced coffee"
+
+
+tall (non-iced) coffee?
+tall mocha?
+
+//////////////////////////////////
+
+How to display filtered results?
+
+In your Menu class, make a FullMenu property that includes all burgers,
+    ice cream, drinks
+
+
+
+
+///////////////////////
+
+Also in Menu class, add filtering methods:
+1) Filter by price
+2) Filter by calories
+3) Filter by keywords
+
+parameters: list/IEnumerable of menu items to search, search criteria
+return: list/IEnumerable of menu items that match the criteria
+
+
+initially, pass in the full menu (to the first filter)
+pass the result of the previous filter to the next filter
+    (and so on)
+
+remember that any of the search criteria might be null
+
+
+Feel free to add extra helper methods/classes/properties as needed
+
+
+///////////////////////////
+
+You will likely want to add additional properties to your Index PageModel
+
+(FilterResults, Burgers, Drinks, IceCream)
+
+
+
+///////////////////////////
+
+Wednesday: discuss LINQ queries, testing, UML updates
+
+price/calories: recommend using LINQ queries
+
+keyword: *can* do with a LINQ query, but recommend just a manual approach
