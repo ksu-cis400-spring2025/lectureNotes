@@ -39,7 +39,7 @@ Clicking the submit button creates a get request
 
 
 
-(form elements also have name, placeholder, min / max (for number type) attributes
+(form elements can also have name, placeholder, min / max)
 
 
 /////////////////////////////
@@ -69,7 +69,9 @@ Example: see initial form Example
 
 
 
---> what happens if we try to add each element to a list in PageModel?
+--> what happens if we try to add each element to a list 
+    in PageModel?
+
     what happens to the list?
 
 
@@ -77,7 +79,8 @@ Example: see initial form Example
 
 Milestone 11:
 
---> add form with filters by calories (low/high), price (low/high), keywords
+--> add form with filters by calories (low/high), price (low/high), 
+    keywords
 
 
 
@@ -100,8 +103,8 @@ tall mocha?
 
 How to display filtered results?
 
-In your Menu class, make a FullMenu property that includes all burgers,
-    ice cream, drinks
+In your Menu class, make a FullMenu property that includes 
+    all burgers, ice cream, drinks
 
 
 
@@ -113,7 +116,8 @@ Also in Menu class, add filtering methods:
 2) Filter by calories
 3) Filter by keywords
 
-parameters: list/IEnumerable of menu items to search, search criteria
+parameters: list/IEnumerable of menu items to search, 
+    search criteria
 return: list/IEnumerable of menu items that match the criteria
 
 
@@ -129,7 +133,8 @@ Feel free to add extra helper methods/classes/properties as needed
 
 ///////////////////////////
 
-You will likely want to add additional properties to your Index PageModel
+You will likely want to add additional properties to your 
+Index PageModel
 
 (FilterResults, Burgers, Drinks, IceCream)
 
@@ -145,4 +150,5 @@ Wednesday: discuss LINQ queries, testing, UML updates
 
 price/calories: recommend using LINQ queries
 
-keyword: *can* do with a LINQ query, but recommend just a manual approach
+keyword: *can* do with a LINQ query, but recommend just a 
+manual approach
