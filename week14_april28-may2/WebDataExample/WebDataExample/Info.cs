@@ -6,7 +6,10 @@
 
         public static void AddWord(string s)
         {
-            Words.Add(s);
+            if (s != null && s != "")
+            {
+                Words.Add(s);
+            }
         }
     }
 }

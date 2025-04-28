@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text;
 
 namespace WebDataExample.Pages
 {
@@ -17,12 +18,10 @@ namespace WebDataExample.Pages
 
         public List<string> AllWords => Info.Words;
 
+
         public void OnGet()
         {
-            if (UserInput != null && UserInput != "")
-            {
-                Info.AddWord(UserInput);
-            }
+            Info.AddWord(UserInput);
         }
     }
 }
