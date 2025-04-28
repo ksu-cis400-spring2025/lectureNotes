@@ -15,11 +15,10 @@ Using what if for exams.
 
 ///////////////////////////
 
-"Data binding" in Razor pages
+Web forms.
 
-Use a form to transfer data from browser to PageModel
 
-Forms have different input elements, notably:
+Forms have different input elements:
     text
     number
     radio button 
@@ -34,7 +33,8 @@ Forms have different input elements, notably:
 </form>
 
 
-Clicking the submit button calls the OnGet method in the PageModel
+Clicking the submit button creates a get request
+    --> calls the OnGet method in the PageModel
 
 
 
@@ -132,6 +132,10 @@ Feel free to add extra helper methods/classes/properties as needed
 You will likely want to add additional properties to your Index PageModel
 
 (FilterResults, Burgers, Drinks, IceCream)
+
+
+
+What should Burgers/Drinks/IceCream properties do?
 
 
 
