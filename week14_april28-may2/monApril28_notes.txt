@@ -93,11 +93,12 @@ You have a match of all the strings are contained in either:
 
 
 
-Example: "tall iced coffee"
+Example: "tall vanilla"
 
 
-tall (non-iced) coffee?
-tall mocha?
+tall coffee? 
+
+grande latte?
 
 //////////////////////////////////
 
@@ -107,6 +108,11 @@ In your Menu class, make a FullMenu property that includes
     all burgers, ice cream, drinks
 
 
+(some list).AddRange(Burgers);
+
+Concat?
+    AddRange updates the existing List object to add the new elements
+    Concat creates a NEW List object containing all the elements (it doesn’t modify the original List).
 
 
 ///////////////////////
@@ -141,6 +147,7 @@ Index PageModel
 
 
 What should Burgers/Drinks/IceCream properties do?
+    Burgers: just the burgers from the search results
 
 
 

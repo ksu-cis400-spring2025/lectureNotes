@@ -12,8 +12,17 @@ namespace WebDataExample.Pages
             _logger = logger;
         }
 
+        [BindProperty(SupportsGet = true)]
+        public string UserInput { get; set; }
+
+        public List<string> AllWords => Info.Words;
+
         public void OnGet()
         {
+            if (UserInput != null && UserInput != "")
+            {
+                Info.AddWord(UserInput);
+            }
         }
     }
 }
