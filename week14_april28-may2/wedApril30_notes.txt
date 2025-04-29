@@ -1,0 +1,151 @@
+Milestone 11: due Friday
+
+
+Next week: POST requests
+    one more milestone (#12)
+
+Optional final.
+    1:30 section: Tuesday, May 13 11:50 am - 1:40 pm
+    2:30 section: Thursday, May 15 4:10-6:00 pm 
+
+
+Using what if for exams.
+
+
+
+--> Website competition
+
+--> I need to hire a new CIS 301 TA for the fall. If you are interested,
+    email me to let me know before the end of next week.
+
+
+
+////////////////////////
+
+LINQ queries.
+
+
+
+//suppose items is an IEnumerable<SomeType>
+
+
+IEnumerable<SomeType> keep = items.Where(item => (some condition about item));
+
+
+Or could write:
+IEnumerable<SomeType> keep = from item in items 
+                        where (some condition about item)
+                        select item;
+
+
+
+//////////////////////
+
+Example: write method that takes an IEnumerable<Person> (each Person has Name, Age),
+minAge, maxAge, firstLetter
+
+Return collection of people whose name begins with that letter and age is in
+the specified range
+
+public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge, uint maxAge,
+                                    char firstLetter) 
+{
+
+
+}
+
+
+
+
+Query style:
+
+public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge, uint maxAge,
+                                    char firstLetter) 
+{
+
+
+}
+
+
+
+////////////////////
+
+Example 
+
+- suppose Employee, Student both extend Person
+- suppose Student has a GPA property
+
+
+
+--> return collection of honor roll (3.5+ GPA) students
+
+public IEnumerable<Person> HonorRoll(IEnumerable<Person> list) 
+{
+    
+
+
+}
+
+
+////////////////////
+
+Example: how to revise above method to put in alphabetical order by name?
+
+
+
+
+
+
+////////////////////
+
+Why LINQ instead of manual?
+
+will combine into one, is more efficient
+
+
+
+////////////////////
+
+Milestone 11 testing.
+
+- price filter (min/max price):
+    test correct if both null -> shouldn't filter anything
+    test correct if just one null 
+    test correct if given both min/max: 
+        what kinds of min/max values?
+
+
+
+        make sure each item in the result has a price in given range
+        make sure each item in menu whose price is in that range is in the result
+
+
+
+- cals filter (min/max cals): same idea
+
+
+
+- keyword filter (big string that is all the keywords):
+    test correct if null or empty -> shouldn't filter anything
+
+    test actual keywords
+        Option 1) Try searching the whole menu
+        Option 2) Create your own smaller menu (recommended)
+
+
+        keywords to test: one word, multiple keywords, mixed case
+            "tall" 
+            "TalL"
+            "tall coffee xyz" 
+            "tall coffee" 
+            "TALL COFFEE"
+            "jack triple veggie" 
+            "jack double veggie"
+
+
+///////////////////
+
+Milestone 11 UML:
+
+    Index
+    Static Menu
