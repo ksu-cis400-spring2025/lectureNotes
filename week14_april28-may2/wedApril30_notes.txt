@@ -29,7 +29,8 @@ LINQ queries.
 //suppose items is an IEnumerable<SomeType>
 
 
-IEnumerable<SomeType> keep = items.Where(item => (some condition about item));
+IEnumerable<SomeType> keep = items.Where(item => 
+                                (some condition about item));
 
 
 Or could write:
@@ -41,14 +42,15 @@ IEnumerable<SomeType> keep = from item in items
 
 //////////////////////
 
-Example: write method that takes an IEnumerable<Person> (each Person has Name, Age),
-minAge, maxAge, firstLetter
+Example: return collection of people whose name begins with the letter
+and whose age is between the bounds
 
-Return collection of people whose name begins with that letter and age is in
-the specified range
+(Assume Person has Name/Age properties)
 
-public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge, uint maxAge,
-                                    char firstLetter) 
+
+
+public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge,
+                                 uint maxAge, char firstLetter) 
 {
 
 
@@ -59,12 +61,13 @@ public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge, uint ma
 
 Query style:
 
-public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge, uint maxAge,
-                                    char firstLetter) 
+public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge,
+                                 uint maxAge, char firstLetter) 
 {
 
 
 }
+
 
 
 
@@ -117,7 +120,8 @@ Milestone 11 testing.
 
 
         make sure each item in the result has a price in given range
-        make sure each item in menu whose price is in that range is in the result
+        make sure each item in menu whose price is in that range 
+            is in the result
 
 
 
