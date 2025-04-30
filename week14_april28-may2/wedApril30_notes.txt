@@ -15,6 +15,8 @@ Using what if for exams.
 
 --> Website competition
 
+
+
 --> I need to hire a new CIS 301 TA for the fall. If you are interested,
     email me to let me know before the end of next week.
 
@@ -52,7 +54,7 @@ and whose age is between the bounds
 public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge,
                                  uint maxAge, char firstLetter) 
 {
-
+    return list.Where(p => p.Age >= minAge && p.Age <= maxAge && p.Name[0] == firstLetter);
 
 }
 
@@ -84,7 +86,7 @@ Example
 
 public IEnumerable<Person> HonorRoll(IEnumerable<Person> list) 
 {
-    
+    return list.Where(p => p is Student s && s.GPA >= 3.5);
 
 
 }
@@ -94,8 +96,14 @@ public IEnumerable<Person> HonorRoll(IEnumerable<Person> list)
 
 Example: how to revise above method to put in alphabetical order by name?
 
+public IEnumerable<Person> HonorRoll(IEnumerable<Person> list) 
+{
+    return list.Where(p => p is Student s && s.GPA >= 3.5).OrderBy(s => s.Name);
 
 
+}
+
+OrderByDescending
 
 
 
@@ -103,8 +111,8 @@ Example: how to revise above method to put in alphabetical order by name?
 
 Why LINQ instead of manual?
 
-will combine into one, is more efficient
 
+more efficient, less code
 
 
 ////////////////////
@@ -116,6 +124,10 @@ Milestone 11 testing.
     test correct if just one null 
     test correct if given both min/max: 
         what kinds of min/max values?
+            0 for the min
+            really big max
+            min/max same (or very close)
+            "normal" values (maybe 5-15)
 
 
 
@@ -123,7 +135,7 @@ Milestone 11 testing.
         make sure each item in menu whose price is in that range 
             is in the result
 
-
+    Assert.Contains, Assert.All
 
 - cals filter (min/max cals): same idea
 
@@ -138,13 +150,14 @@ Milestone 11 testing.
 
 
         keywords to test: one word, multiple keywords, mixed case
-            "tall" 
-            "TalL"
-            "tall coffee xyz" 
-            "tall coffee" 
-            "TALL COFFEE"
-            "jack triple veggie" 
-            "jack double veggie"
+            "tall" - drinks (different kinds)
+            "TalL" - same
+            "tall coffee xyz" - should not give ANY results
+            "tall coffee"  - just the tall coffees
+            "coffee tall" - just the tall coffees
+            "TALL COFFEE" 
+            "jack triple veggie" - just BYO
+            "jack double veggie" - BYO and Veggie
 
 
 ///////////////////
