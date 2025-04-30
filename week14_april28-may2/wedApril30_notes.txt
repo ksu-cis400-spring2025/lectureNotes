@@ -54,21 +54,11 @@ and whose age is between the bounds
 public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge,
                                  uint maxAge, char firstLetter) 
 {
+
     return list.Where(p => p.Age >= minAge && p.Age <= maxAge && p.Name[0] == firstLetter);
-
 }
 
 
-
-
-Query style:
-
-public IEnumerable<Person> Filter(IEnumerable<Person> list, uint minAge,
-                                 uint maxAge, char firstLetter) 
-{
-
-
-}
 
 
 
@@ -98,13 +88,12 @@ Example: how to revise above method to put in alphabetical order by name?
 
 public IEnumerable<Person> HonorRoll(IEnumerable<Person> list) 
 {
+
     return list.Where(p => p is Student s && s.GPA >= 3.5).OrderBy(s => s.Name);
-
-
 }
 
-OrderByDescending
 
+OrderByDescending
 
 
 ////////////////////
@@ -124,10 +113,10 @@ Milestone 11 testing.
     test correct if just one null 
     test correct if given both min/max: 
         what kinds of min/max values?
-            0 for the min
-            really big max
-            min/max same (or very close)
-            "normal" values (maybe 5-15)
+            min is 0
+            max is either the max from the input or a really big number
+            min equals the max
+            "normal" test case (5-15), maybe a couple
 
 
 
@@ -150,14 +139,14 @@ Milestone 11 testing.
 
 
         keywords to test: one word, multiple keywords, mixed case
-            "tall" - drinks (different kinds)
+            "tall" - drinks (all)
             "TalL" - same
-            "tall coffee xyz" - should not give ANY results
-            "tall coffee"  - just the tall coffees
-            "coffee tall" - just the tall coffees
-            "TALL COFFEE" 
-            "jack triple veggie" - just BYO
-            "jack double veggie" - BYO and Veggie
+            "tall coffee xyz" - none
+            "tall coffee" - just the tall coffee
+            "coffee tall" - still just the tall coffe
+            "TALL COFFEE" - still the same
+            "jack triple veggie" - BYO with that customization, not veggie
+            "jack double veggie" - BYO with that customization, also veggie 
 
 
 ///////////////////
