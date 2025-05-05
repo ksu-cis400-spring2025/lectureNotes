@@ -286,7 +286,9 @@ public IEnumerable<Student> HonorRoll {
 
 /////////////////
 
---> see pie UML
+--> see pie UML (note: there are a couple of errors in the UML.
+    Assume PieSampler has a TotalPrice property, a private backing field for the pie list,
+    and that the List<PaleozoicPie> property is named "Pies")
 
 
 Add the appropriate UML associations to the diagram. 
