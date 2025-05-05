@@ -68,28 +68,54 @@ For open-ended:
 General review:
 
 
-Encapsulation --> 
+Encapsulation --> going from a problem statement to class definitions
 
 Defining a class -->
     when do we need a constructor?
+        if I want to require initial values for properties/fields
+        when creating the object, would have those as params to constructor
 
-    when do we need a static constructor?
+    when do we need a static constructor? if we want to initialize things
+        before anything else in the class is used
        
 
 Polymorphism --> 
     many forms
-    IceCreamCone - possible types?
+    IceCreamCone - possible types? IceCream, IMenuItem, IceCreamCone,
+        object, INotifyPropertyChanged
+
+        INotifyPropertyChanged c = new IceCreamCone();
 
 
 
 Inheritance --> 
-    example? 
-    why? 
+    example? Burger, ClassicCheeseburger (and all the others)
+    why? common properties, and common operations (like calories)
     different names for each class?
+        Burger: parent class, ancestor, super class, base class
+        ClassicCheeseburger: child class, descendent, sub class, derived class
+
     how to implement methods/properties differently?
+        parent: use "virtual", or "abstract" (only if the parent class is abstract)
+        child: use "override"
 
     how do constructors work?
+        Child c = new Child();
+            first code executed is in the top parent
+            (then the next ancestor down, if any)
+            finally child constructor
+
     rules when extending a class?
+
+        public abstract class Parent {
+            public abstract void Something();
+        }
+
+        public abstract class Child : Parent {
+            //inherit public abstract void Something();
+        }
+
+        //OR, could be non-abstract and override all abstract from parent
 
 
     public class Animal {
@@ -101,35 +127,40 @@ Inheritance -->
 
         public void Talk {
             Console.WriteLine("words");
+            Console.WriteLine(_name);
         }
     }
 
     public class Dog: Animal {
         //is this OK?
-        public Dog() {}
+        public Dog() : base("Fido") {}
     }
 
     //is this OK?
     public class Collie: Dog {
-
+        //automatically: public Collie() : base()
     }
 
 
 Are these OK?
-    Animal a = new Dog(); 
-    Dog d = a; 
+    Animal a = new Dog();       //Yes! Dogs are Animals
+    Dog d = a;                  //NO! Would need an explicit cast
 
-    Dog c = new Collie();
-    c.Talk();
-
-
+    Dog c = new Collie();        //YES! Collies are Dogs
+    c.Talk();                   //YES! Prints "words", "Fido"
 
 
-Interfaces - why?
+
+
+Interfaces - why? blueprint, list of requirements for a class
 
 
 Abstract classes -->
     how different from interfaces?
+        abstract class can have a constructor
+        visibilities
+        abstract classes can have fields, fully implemented methods/properties
+        
     
     rules when extending an abstract class?
 
@@ -146,14 +177,19 @@ Abstract classes -->
 
 Events
 Data binding
-MVVM
+MVVM - model, view, viewmodel
+    in WPF, view model is the DataContext of the view
+            view model has access to model
+            model has access to nothing
 
-Field --> can we override?
+Field --> can we override? NO! (only properties/methods)
 Method
 Property --> difference from field? types of accessors? 
+    change get/set visibility
+    can have derived properties that compute the value (like a method)
 
 public
-protected --> where visible? 
+protected --> where visible? own class, children
 private
 static --> how do we use?
 
@@ -225,7 +261,18 @@ Look at UML of student information.
 
 --> complete FilterByStanding
 
+public IEnumerable<Student> FilterByStanding(Standing s) {
+    return _students.Where(item => item.CurStanding == s);
+}
+
+
 --> HonorRoll (3.5 and up, srs only)
+
+public IEnumerable<Student> HonorRoll {
+    get {
+        return FilterByStanding(Standing.Senior).Where(item => item.GPA >= 3.5);
+    }
+}
 
 /////////////////
 
@@ -247,3 +294,34 @@ Write the PaleozoicPie class definition.
 
 (if time, how would it work for PieSampler if it had a TotalPrice property
     that was 75% of total pie price?)
+
+public class PieSampler : INotifyPropertyChanged {
+    public event PropertChangedEventHandler? PropertyChanged;
+
+    private List<PaleozoicPie> _pies = new();
+
+    public List<PaleozoicPie> Pies => _pies;
+
+    public decimal TotalPrice {
+        get {
+            decimal sum = 0.0m;
+            foreach (PaleozoicPie p in _pies) {
+                sum += p.Price;
+            }
+
+            return sum * 0.75m;
+        }
+    }
+
+    private void HandlePieChange(object sender, PropertyChangedEventArgs e) {
+        if (e.PropertyName == "Price") {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TotalPrice)));
+        }
+    }
+
+    public void AddPie(PaleozoicPie p) {
+        _pies.Add(p);
+        p.PropertyChanged += HandlePieChange;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TotalPrice)));
+    }
+} 
