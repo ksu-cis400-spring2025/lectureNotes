@@ -72,50 +72,46 @@ Encapsulation --> going from a problem statement to class definitions
 
 Defining a class -->
     when do we need a constructor?
-        if I want to require initial values for properties/fields
-        when creating the object, would have those as params to constructor
+        to require that things get initialized when creating an object
+        (have params for required info)
 
-    when do we need a static constructor? if we want to initialize things
-        before anything else in the class is used
+    when do we need a static constructor? don't have to
+        if you want initializaton work done, put in static constructor
+        will run before anything else
+
+
        
 
 Polymorphism --> 
     many forms
-    IceCreamCone - possible types? IceCream, IMenuItem, IceCreamCone,
-        object, INotifyPropertyChanged
-
-        INotifyPropertyChanged c = new IceCreamCone();
+    IceCreamCone - IMenuItem, IceCream, INotifyPropertyChanged, 
+                    object, IceCreamCone
 
 
 
 Inheritance --> 
-    example? Burger, ClassicCheeseburger (and all the others)
-    why? common properties, and common operations (like calories)
+    example? 
+        Burger was a parent
+        BBQBaconCheeseburger was a child class 
+    why? pull out common code to parent, and child can inherit
+
     different names for each class?
-        Burger: parent class, ancestor, super class, base class
-        ClassicCheeseburger: child class, descendent, sub class, derived class
+        parent class, base class, super class
+        child class, derived class, sub class
 
     how to implement methods/properties differently?
-        parent: use "virtual", or "abstract" (only if the parent class is abstract)
-        child: use "override"
+        parent class: virtual, or abstract (would mean parent class was abstract)
+        child class: extend the parent, put "override" on method/property
+
+
 
     how do constructors work?
-        Child c = new Child();
-            first code executed is in the top parent
-            (then the next ancestor down, if any)
-            finally child constructor
+        highest up ancestor tree constructor code runs first
+        ...
+        lastly, child constructor code runs
 
     rules when extending a class?
 
-        public abstract class Parent {
-            public abstract void Something();
-        }
-
-        public abstract class Child : Parent {
-            //inherit public abstract void Something();
-        }
-
-        //OR, could be non-abstract and override all abstract from parent
 
 
     public class Animal {
@@ -138,29 +134,32 @@ Inheritance -->
 
     //is this OK?
     public class Collie: Dog {
-        //automatically: public Collie() : base()
+       //don't need anything here
+       // _name (can't see here)
     }
 
 
 Are these OK?
-    Animal a = new Dog();       //Yes! Dogs are Animals
-    Dog d = a;                  //NO! Would need an explicit cast
+    Animal a = new Dog();       //YES! Dogs are Animals
+    Dog d = a;                  //NO! Animals aren't necessarily Dogs
+                                //would need explicit cast       
 
-    Dog c = new Collie();        //YES! Collies are Dogs
-    c.Talk();                   //YES! Prints "words", "Fido"
+    Dog c = new Collie();      //YES! Collies are Dogs 
+    c.Talk();                   //YES! Prints "words", "Fido" 
 
 
 
 
-Interfaces - why? blueprint, list of requirements for a class
+Interfaces - why? list of requirements for the implementing classes
 
 
 Abstract classes -->
     how different from interfaces?
-        abstract class can have a constructor
-        visibilities
-        abstract classes can have fields, fully implemented methods/properties
-        
+        interface: can't implement methods/properties,
+            can fully implement some (or all) in abstract class
+            interface can't have fields
+            can implement a lot of interfaces
+            can only extend one class (abstract or otherwise)
     
     rules when extending an abstract class?
 
@@ -172,31 +171,41 @@ Abstract classes -->
        //what do we have to do?
     }
 
+    either make Child abstract
+    or, override DoStuff
+
     what does an abstract class need to do when implementing an interface?
 
 
 Events
 Data binding
 MVVM - model, view, viewmodel
-    in WPF, view model is the DataContext of the view
-            view model has access to model
-            model has access to nothing
+    viewmodel: have an instance of the model
+        has properties that the view can display, or that control display logic
+    view has access to the viewmodel (the viewmodel is the DataContext for the view)
 
-Field --> can we override? NO! (only properties/methods)
+Field --> can we override? no (also can't be virtual/abstract)
 Method
 Property --> difference from field? types of accessors? 
-    change get/set visibility
-    can have derived properties that compute the value (like a method)
+    can be virtual/abstract, can override
+    can have different accessors with different visibility
+    can have derived properties that don't store anything themselves,
+        but whose value comes from others
 
 public
-protected --> where visible? own class, children
+protected --> where visible? 
 private
 static --> how do we use?
 
 Implicit casting --> when?
 
+    Animal a = new Dog();
+
 Explicit casting --> different ways. When is it needed?
 
+    as, (type), is Dog d
+
+    Dog d = a; <-- NO, needed explicit casting
 
 virtual --> places used? behavior?
 
@@ -243,11 +252,12 @@ public class ChildClass : AbstractClass, IInterface {
     }
 }
 
-AbstractClass c = new ChildClass();
-c.Method2(); // what happens?
+AbstractClass c = new ChildClass(); //Fine
+c.Method2(); // what happens? prints "child"
 
 
 <-- is the word "override" required for AbstractMethod?
+    no, but would use method2 from parent
 
 
 ChildClass c = new ChildClass();
@@ -270,7 +280,7 @@ public IEnumerable<Student> FilterByStanding(Standing s) {
 
 public IEnumerable<Student> HonorRoll {
     get {
-        return FilterByStanding(Standing.Senior).Where(item => item.GPA >= 3.5);
+       return FilterByStanding(Standing.Senior).Where(item => item.GPA >- 3.5);
     }
 }
 
@@ -295,33 +305,37 @@ Write the PaleozoicPie class definition.
 (if time, how would it work for PieSampler if it had a TotalPrice property
     that was 75% of total pie price?)
 
-public class PieSampler : INotifyPropertyChanged {
-    public event PropertChangedEventHandler? PropertyChanged;
 
+
+public class PieSampler : INotifyPropertyChanged {
     private List<PaleozoicPie> _pies = new();
 
     public List<PaleozoicPie> Pies => _pies;
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     public decimal TotalPrice {
         get {
-            decimal sum = 0.0m;
+            decimal sum = 0m;
             foreach (PaleozoicPie p in _pies) {
                 sum += p.Price;
             }
 
-            return sum * 0.75m;
+            return sum*0.75m;
         }
     }
 
-    private void HandlePieChange(object sender, PropertyChangedEventArgs e) {
+    private void ItemChanged(object sender, PropertyChangedEventArgs e) {
         if (e.PropertyName == "Price") {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TotalPrice)));
         }
-    }
+    } 
 
-    public void AddPie(PaleozoicPie p) {
-        _pies.Add(p);
-        p.PropertyChanged += HandlePieChange;
+    public void AddPie(PaleozoicPie pie) {
+        _pies.Add(pie);
+        pie.PropertyChanged += ItemChanged;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TotalPrice)));
     }
-} 
+
+
+}
