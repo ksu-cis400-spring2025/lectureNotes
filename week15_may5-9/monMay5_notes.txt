@@ -1,3 +1,9 @@
+Today: review for final exam 
+Wed/Fri: work time / checkoff for milestone 12
+
+
+////////////////////////////
+
 General announcements:
 - NO late work accepted after Friday, May 9 (includes milestones and tutorials)
 - Milestone 12 must be checked off in class or office hours (not Canvas)
@@ -6,8 +12,6 @@ General announcements:
     (Dairy Queen? Freddy's? Culver's?)
 
 
-
-////////////////////////////
 
 Tutorial: POST requests and JSON (due today)
 
@@ -24,7 +28,8 @@ Optional final.
 Format.
     Paper-based, closed notes, closed computers.
     Multiple choice followed by open-ended.
-    Similar format as midterms
+    Similar format as midterms, but slightly longer
+
 
 --> be familiar with all vocabulary terms
 
